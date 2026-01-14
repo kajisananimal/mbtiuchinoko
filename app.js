@@ -938,3 +938,13 @@ document.addEventListener("click",(e)=>{
   void b.offsetWidth;
   b.classList.add("btn-purun");
 });
+
+/* ===== V15_PROMINENT_PURUN ===== */
+document.addEventListener("click",(e)=>{
+  const b = e.target && e.target.closest ? e.target.closest("button") : null;
+  if(!b) return;
+  if(!b.classList.contains("btn-prominent")) return;
+  b.classList.remove("btn-purun");
+  void b.offsetWidth;
+  b.classList.add("btn-purun");
+});

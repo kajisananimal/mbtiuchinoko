@@ -30,64 +30,16 @@
     <!-- HOME -->
     <section class="view" id="view-home">
 
-      <div class="poster">
-        <div class="poster__bg">
-          <span class="pblob pb1"></span><span class="pblob pb2"></span><span class="pblob pb3"></span>
-          <span class="pspark ps1">✦</span><span class="pspark ps2">✦</span><span class="pspark ps3">✦</span>
-          <span class="pheart ph1">♥</span><span class="pheart ph2">♥</span>
-        </div>
+    <div class="homeExact">
+      <div class="homeExact__hero" role="img" aria-label="うちのこMBTI トップ"></div>
 
-        <div class="poster__top">
-          <div class="poster__tag"># ペット性格診断 ✨</div>
-          <div class="poster__tags">
-            <span class="posterChip">#かんたん診断</span>
-            <span class="posterChip">#シェアしよう</span>
-          </div>
-        </div>
+      <!-- Hotspots (transparent buttons) -->
+      <button type="button" class="homeExact__hotspot hotspot-start btn-prominent" data-nav="#quiz" aria-label="診断スタート"></button>
+      <button type="button" class="homeExact__hotspot hotspot-detail btn-prominent" data-nav="#types" aria-label="診断の内容を見る"></button>
+      <button type="button" class="homeExact__hotspot hotspot-compat btn-prominent" data-nav="#compat" aria-label="相性チェック"></button>
+    </div>
 
-        <div class="poster__logo">
-          <div class="posterLogo">
-            <span class="posterLogo__txt">うちのこ</span>
-            <span class="posterLogo__mbti">MBTI</span>
-          </div>
-          <div class="peekers" aria-hidden="true">
-            <span class="peeker cat">🐱</span>
-            <span class="peeker dog">🐶</span>
-          </div>
-        </div>
-
-        <div class="poster__ribbon">30問でサクッと診断♪<br>結果カードを保存しよう！</div>
-
-        <div class="poster__actions">
-          <button type="button" class="btn btn-primary btn-giant" data-nav="#quiz">
-            <span class="btnIcon" aria-hidden="true">🐾</span> 診断スタート！
-          </button>
-
-          <div class="poster__sub">
-            <button type="button" class="btn btn-sub" data-nav="#types">
-              <span class="btnIcon" aria-hidden="true">📖</span> タイプ一覧
-            </button>
-            <button type="button" class="btn btn-sub2" data-nav="#compat">
-              <span class="btnIcon" aria-hidden="true">💗</span> 相性診断
-            </button>
-          </div>
-
-          <button type="button" class="btn btn-ghost btn-big" id="shareTop" title="リンクを共有">
-            <span class="btnIcon" aria-hidden="true">🔗</span> リンクを共有
-          </button>
-        </div>
-      </div>
-
-      <div class="note note--soft">
-        <h3 class="note__title">使い方</h3>
-        <ul class="note__list">
-          <li>直感でポチポチ答えてOK</li>
-          <li>最後に結果カードが出ます（保存・Xシェア・リンク共有）</li>
-          <li>「かいぬしとの相性」で、人間MBTIとの相性も見られます</li>
-        </ul>
-      </div>
-
-    </section>
+  </section>
 
     <!-- QUIZ -->
     <section class="view" id="view-quiz" hidden>

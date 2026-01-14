@@ -884,3 +884,62 @@ body{letter-spacing:.2px}
   100%{transform: translateY(0) scale(1)}
 }
 .btn-purun{ animation: purun .32s cubic-bezier(.2,.9,.2,1); }
+
+/* ===== HOME_EXACT_V15 (image-based exact top) ===== */
+.homeExact{
+  width: min(760px, 94vw);
+  margin: 10px auto 0;
+  position: relative;
+}
+.homeExact__hero{
+  width: 100%;
+  aspect-ratio: 3 / 4; /* match provided artwork */
+  border-radius: 34px;
+  background: url("assets/home_top.png") center/cover no-repeat;
+  box-shadow: 0 26px 70px rgba(23,28,45,.16);
+  border: 2px solid rgba(255,255,255,.78);
+}
+.homeExact__hotspot{
+  position:absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hotspot positions tuned for the provided image. */
+.hotspot-start{
+  left: 16%;
+  top: 61.8%;
+  width: 68%;
+  height: 10.8%;
+  border-radius: 999px;
+}
+.hotspot-detail{
+  left: 19%;
+  top: 76.5%;
+  width: 34.5%;
+  height: 7.8%;
+  border-radius: 999px;
+}
+.hotspot-compat{
+  left: 46.5%;
+  top: 76.5%;
+  width: 34.5%;
+  height: 7.8%;
+  border-radius: 999px;
+}
+
+/* Topbar like reference */
+.topbar{background: rgba(255,255,255,.86); backdrop-filter: blur(10px);}
+.brand{display:flex; align-items:center; gap:10px;}
+.brandMark{font-size:22px}
+.brandText{
+  font-weight: 1000;
+  font-size: 22px;
+  background: linear-gradient(135deg, rgba(255,61,141,1), rgba(61,214,255,1));
+  -webkit-background-clip:text; background-clip:text;
+  color: transparent;
+  letter-spacing: .5px;
+}
+.brandSpark{color: rgba(255,183,3,1); filter: drop-shadow(0 10px 18px rgba(23,28,45,.10));}
