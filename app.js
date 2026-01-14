@@ -40,14 +40,14 @@ const PET_TYPE_DATA = {
   INTP: {
     name: "研究熱心マイペースタイプ",
     catch: "気になるものは徹底チェック。納得したら動く。",
-    desc: "好奇心で世界を検証する“実験家”。新しいおもちゃや音、においを自分なりに分析して楽しみます。テンションは波があり、突然スイッチが入って集中することも。干渉されすぎると距離を取るけど、放っておくと近づいてくるツンデレ傾向。",
+    desc: "好奇心で世界を検証する“実験家”。新しいおもちゃや音、においを自分なりに分析して楽しみます。気分は波があり、突然スイッチが入って集中することも。干渉されすぎると距離を取るけど、放っておくと近づいてくるツンデレ傾向。",
     likes: "好き：探検・匂いチェック・一人遊び。嫌い：急な抱っこ・強制的な指示。得意：仕組み発見・学習。苦手：予定ぎっしり・過干渉。",
     goodHumans: ["ENFJ","INFJ","ENTP","ISFJ"],
   },
   ENTJ: {
     name: "主役のリーダータイプ",
     catch: "場を仕切るのが得意。自分流で進めたい。",
-    desc: "堂々として存在感のある“指揮官”。遊びも散歩も「こうしたい」がはっきりしていて、主導権を取りがち。ルールが分かるとすぐ覚える反面、曖昧だと納得しません。褒められると伸びるので、目標（ごほうび）設計が上手い飼い主と相性◎。",
+    desc: "堂々として存在感のある“指揮官”。遊びも散歩も「こうしたい」がはっきりしていて、主導権を取りがち。ルールが分かるとすぐ覚える反面、曖昧だと納得しません。褒められると育ちやすいですので、目標（ごほうび）設計が上手い飼い主と相性◎。",
     likes: "好き：勝てる遊び・褒められること。嫌い：曖昧な指示・待たされる。得意：トレーニング・先導。苦手：退屈・一貫性のないルール。",
     goodHumans: ["INFP","INFJ","ISTP","ESFJ"],
   },
@@ -69,7 +69,7 @@ const PET_TYPE_DATA = {
   INFP: {
     name: "やさしい夢みがちタイプ",
     catch: "気分で動くけど、愛情は深い。",
-    desc: "自分の“好き”に正直な“ロマン派”。気分が乗ると超甘えん坊、乗らないとそっと距離を取る…という波があります。無理にコントロールされるより、選べる余地があるほうが安心。叱るより「できたね！」で伸びるタイプで、ゆっくり信頼を育てると一生推しになります。",
+    desc: "自分の“好き”に正直な“ロマン派”。気分が乗ると超甘えん坊、乗らないとそっと距離を取る…という波があります。無理にコントロールされるより、選べる余地があるほうが安心。叱るより「できたね！」で育ちやすいですタイプで、ゆっくり信頼を育てると一生推しになります。",
     likes: "好き：お気に入り毛布・なでなで。嫌い：急な大声・強制。得意：甘え・空気感。苦手：ハードなルール・せかされること。",
     goodHumans: ["ENFJ","ENTJ","ISFJ","ESFP"],
   },
@@ -83,14 +83,14 @@ const PET_TYPE_DATA = {
   ENFP: {
     name: "わくわく冒険タイプ",
     catch: "楽しそう！に全振り。好奇心で世界を広げる。",
-    desc: "好奇心と感情がまっすぐな“冒険家”。新しい道、新しいおもちゃ、新しい人…とにかくワクワクが大好物。テンションが上がると大はしゃぎしやすいので、短い休憩をはさみながら遊ぶと上手に落ち着けます。自由にさせるほど愛情深く懐くタイプ。",
+    desc: "好奇心と感情がまっすぐな“冒険家”。新しい道、新しいおもちゃ、新しい人…とにかくワクワクが大好物。気分が上がると大はしゃぎしやすいので、短い休憩をはさみながら遊ぶと上手に落ち着けます。自由にさせるほど愛情深く懐くタイプです。",
     likes: "好き：新しい刺激・探検。嫌い：単調な毎日。得意：遊びの発明・甘え。苦手：長い我慢・細かい管理。",
     goodHumans: ["INFJ","INTJ","ESFJ","ISTP"],
   },
 
   ISTJ: {
     name: "きっちり番犬（番猫）タイプ",
-    catch: "ルーティンが命。決まりがあると安心する。",
+    catch: "ルーティンが命。決まりがあると安心できます。",
     desc: "安定と秩序が大好きな“きっちり派”。いつもの時間、いつもの場所、いつもの流れがあると落ち着きます。急な変更には警戒しやすいけれど、慣れれば最強の安心感をくれる相棒に。トレーニングはコツコツ型で、積み上げるほど信頼が深まります。",
     likes: "好き：いつもの散歩・決まった寝床。嫌い：突然の変更。得意：継続・覚える。苦手：イレギュラー・せかされる。",
     goodHumans: ["ENFJ","ESFJ","ISTP","INFJ"],
@@ -98,7 +98,7 @@ const PET_TYPE_DATA = {
   ISFJ: {
     name: "お世話上手の守りタイプ",
     catch: "家と家族を大事にする、優しい番人。",
-    desc: "安心基地を守る“ほっこり派”。かいぬしの行動をよく覚えていて、生活に寄り添うのが得意です。大きな刺激より、穏やかな毎日が好き。褒められると控えめに喜び、そっと近くにいてくれるタイプ。環境の変化があるときは、匂いのある毛布などで安心を作ると◎。",
+    desc: "安心基地を守る“ほっこり派”。かいぬしの行動をよく覚えていて、生活に寄り添うのが得意です。大きな刺激より、穏やかな毎日が好き。褒められると控えめに喜び、そっと近くにいてくれるタイプです。環境の変化があるときは、匂いのある毛布などで安心を作ると◎。",
     likes: "好き：家族のそば・穏やかな日常。嫌い：荒い扱い・騒音。得意：気配り・見守り。苦手：環境変化・乱雑。",
     goodHumans: ["INTJ","INTP","INFP","ESFJ"],
   },
@@ -133,7 +133,7 @@ const PET_TYPE_DATA = {
   },
   ESTP: {
     name: "突撃アクションタイプ",
-    catch: "まず動く。テンションと勝負で世界を攻略。",
+    catch: "まず動く。気分と勝負で世界を攻略。",
     desc: "行動力MAXの“現場主義”。追いかけっこや引っ張りっこなど、身体を使う遊びが大好物。反応が早く、刺激にも強めです。退屈するといたずらに走りやすいので、短い運動＋頭を使う遊びを混ぜると最高。ルールは“ゲーム化”すると覚えます。",
     likes: "好き：運動・勝負・新しい刺激。嫌い：退屈・長い待て。得意：瞬発力・現場対応。苦手：単調・細かい管理。",
     goodHumans: ["ISFJ","ENTJ","ESFP","ISTJ"],
@@ -141,7 +141,7 @@ const PET_TYPE_DATA = {
   ESFP: {
     name: "アイドルわんにゃんタイプ",
     catch: "注目されたい！楽しいことは全部好き。",
-    desc: "明るく感情表現が豊かな“エンタメ”。人の反応が大好物で、笑ってもらえるとさらにテンションUP。お出かけやイベントも向いています。寂しいと急にしょんぼりしがちなので、声かけと遊びで安心をキープ。写真映えも最強です。",
+    desc: "明るく感情表現が豊かな“エンタメ”。人の反応が大好物で、笑ってもらえるとさらに気分UP。お出かけやイベントも向いています。寂しいと急にしょんぼりしがちなので、声かけと遊びで安心をキープ。写真映えも最強です。",
     likes: "好き：一緒に遊ぶ・注目。嫌い：孤独・静かすぎ。得意：愛嬌・社交。苦手：長時間のお留守番・退屈。",
     goodHumans: ["INFP","ENTP","ESTP","INFJ"],
   },
@@ -167,12 +167,12 @@ const QUESTIONS = [
   {dim:"SN", a:"観察するときは細部（音/匂い/動き）を見てる", b:"全体の雰囲気や“流れ”で動く", aL:"S", bL:"N"},
   {dim:"SN", a:"ごはんは“いつもの味”が好き", b:"新しいフードも試したがる", aL:"S", bL:"N"},
   {dim:"SN", a:"おもちゃは実物っぽい動きが好き", b:"予想外の動きやギミックが好き", aL:"S", bL:"N"},
-  {dim:"SN", a:"変化があると慎重になる", b:"変化があるとテンションが上がる", aL:"S", bL:"N"},
+  {dim:"SN", a:"変化があると慎重になる", b:"変化があると気分が上がる", aL:"S", bL:"N"},
 
   // T/F (7)
   {dim:"TF", a:"叱られても切り替えが早い", b:"気持ちが引きずりやすい", aL:"T", bL:"F"},
   {dim:"TF", a:"淡々と指示に従うのが得意", b:"気分や相手の雰囲気で動く", aL:"T", bL:"F"},
-  {dim:"TF", a:"ごほうびがあると最短で覚える", b:"褒められると伸びる", aL:"T", bL:"F"},
+  {dim:"TF", a:"ごほうびがあると最短で覚える", b:"褒められると育ちやすいです", aL:"T", bL:"F"},
   {dim:"TF", a:"抱っこより“距離感”が大事", b:"スキンシップが大事", aL:"T", bL:"F"},
   {dim:"TF", a:"自分の目的が優先になりやすい", b:"相手の気持ちに合わせやすい", aL:"T", bL:"F"},
   {dim:"TF", a:"静かに見守られる方が安心", b:"声かけされる方が安心", aL:"T", bL:"F"},
@@ -187,6 +187,21 @@ const QUESTIONS = [
   {dim:"JP", a:"予定が見えると安心する（出発前が得意）", b:"急に決まってもなんとかなる", aL:"J", bL:"P"},
   {dim:"JP", a:"やることが終わるまで集中", b:"途中で別のことに興味が移る", aL:"J", bL:"P"},
 ];
+
+
+function bindQuizButtonsOnce(){
+  const resultBtn = document.getElementById("btnResult");
+  const resetBtn = document.getElementById("btnReset");
+  if(resultBtn && !resultBtn.dataset.bound){
+    resultBtn.addEventListener("click", onSubmitQuiz);
+    resultBtn.dataset.bound = "1";
+  }
+  if(resetBtn && !resetBtn.dataset.bound){
+    resetBtn.addEventListener("click", resetQuiz);
+    resetBtn.dataset.bound = "1";
+  }
+}
+
 
 function $(sel){ return document.querySelector(sel); }
 function $all(sel){ return Array.from(document.querySelectorAll(sel)); }
@@ -213,7 +228,7 @@ function show(hash){
   const id = map[target] || "#view-home";
   $(id).hidden = false;
 
-  if(target==="#quiz") renderQuiz();
+  if(target==="#quiz"){ renderQuiz(); bindQuizButtonsOnce(); }
   if(target==="#types") renderTypesGrid();
   if(target==="#result") window.scrollTo({top:0, behavior:"smooth"});
 
@@ -221,7 +236,7 @@ function show(hash){
 }
 
 window.addEventListener("hashchange", ()=>show(location.hash));
-window.addEventListener("load", ()=>show(location.hash || "#home"));
+window.addEventListener("load", ()=>{ bindQuizButtonsOnce(); show(location.hash || "#home"); });
 
 /* ---------- NAV ---------- */
 document.addEventListener("click",(e)=>{
@@ -495,7 +510,41 @@ async function saveCardToAlbum(){
   toast("画像をダウンロードしました");
 }
 
-/* ---------- COMPAT ---------- */
+async function saveCompatToAlbum(){
+  const box = document.getElementById("compatCard") || document.getElementById("compatResult");
+  if(!box || box.hidden){
+    toast("先に相性診断をしてね");
+    return;
+  }
+  toast("相性結果を画像化中…");
+  const canvas = await html2canvas(box, {backgroundColor: "#ffffff", scale: 2, useCORS: true});
+  const blob = await new Promise(res=>canvas.toBlob(res, "image/png", 1.0));
+  if(!blob){
+    toast("画像の作成に失敗しました");
+    return;
+  }
+
+  const file = new File([blob], "uchinoko-compat.png", {type:"image/png"});
+  try{
+    if(navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){
+      await navigator.share({files:[file], title:"うちのこMBTI 相性", text:"相性結果"});
+      toast("共有シートを開きました（画像を保存を選んでね）");
+      return;
+    }
+  }catch(err){ /* cancelled */ }
+
+  const a = document.createElement("a");
+  const objUrl = URL.createObjectURL(blob);
+  a.href = objUrl;
+  a.download = "uchinoko-compat.png";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(objUrl), 8000);
+  toast("画像をダウンロードしました");
+}
+
+ /* ---------- COMPAT ---------- */
 function fillSelects(){
   const petSel = $("#petTypeSelect");
   const humanSel = $("#humanTypeSelect");
@@ -525,6 +574,7 @@ $("#btnCompat").addEventListener("click", ()=>{
   $("#compatTypes").textContent = `${pet}（うちのこ） × ${human}（かいぬし）`;
   $("#compatText").textContent = text;
   $("#compatResult").hidden = false;
+  setCompatDate(pet, human, percent);
   localStorage.setItem("uchinoko_mbti_lastType", pet);
   window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"});
 });
@@ -571,7 +621,7 @@ function groupSynergy(pet, human){
     SP: {NT:2, NF:3, SJ:3, SP:2},
   };
   let bonus = (matrix[pg]?.[hg] ?? 2) - 2; // -?〜+?
-  // 同じE/Iは近いテンション、違うと補完（+1）
+  // 同じE/Iは近い気分、違うと補完（+1）
   if(pet[0] !== human[0]) bonus += 1;
   // J/Pが違うと補完（+1）
   if(pet[3] !== human[3]) bonus += 1;
@@ -583,20 +633,118 @@ function groupSynergy(pet, human){
   return clampInt(bonus, -8, 8);
 }
 
+
 function buildCompatText(pet, human, percent, match, bonus){
   const petD = PET_TYPE_DATA[pet];
-  const humanStyle = human[2]==="F" ? "共感と安心" : "ルールと設計";
-  const tempo = human[3]==="J" ? "整えながら" : "ゆるく試しながら";
-  const social = human[0]==="E" ? "声かけ多め" : "見守り多め";
+  const pg = groupOf(pet);
+  const hg = groupOf(human);
 
-  let line1 = `相性度は${percent}%。かいぬしが「${humanStyle}」で関わると、うちのこの良さが伸びやすい組み合わせです。`;
-  let line2 = `コツは「${social}」＋「${tempo}」でルーティンを作ること。`;
-  let line3 = `特に「${petD?.name || "このタイプ"}」は、無理に変えず“得意”を増やすほど信頼が深まります。`;
+  // 4軸から“関わり方”を具体化（ペット×人間前提）
+  const energyTip = (pet[0]===human[0])
+    ? (pet[0]==="E" ? "一緒にテンポよく遊ぶほど仲良し" : "静かな時間を共有すると信頼が深まる")
+    : (pet[0]==="E" ? "うちのこは刺激があると安心します。かいぬしは短時間で濃く関わると◎" : "うちのこは一人時間が必要。かいぬしは“見守り”多めが◎");
 
-  // 150〜200字に寄せる
-  const all = (line1 + "\n" + line2 + "\n" + line3);
-  return clampText(all, 150, 210);
+  const infoTip = (pet[1]===human[1])
+    ? (pet[1]==="S" ? "“いつもの流れ”を作ると安心" : "新しい遊びやコースを一緒に試すと盛り上がる")
+    : (pet[1]==="S" ? "現実ベースが安心。環境変化は小さく刻むと良い" : "好奇心を満たす工夫が大事。刺激を少しずつ増やすと良い");
+
+  const heartTip = (human[2]==="F")
+    ? "声かけ・安心の合図・やさしい触れ方が効果的です"
+    : "ルールを短く明確に、成功体験（ごほうび）で育ちやすいです";
+
+  const planTip = (human[3]==="J")
+    ? "時間と順番を固定すると落ち着く"
+    : "気分に合わせて“遊びの種類”を変えると飽きにくい";
+
+  const themes = [
+    `相性は${percent}%。${energyTip}タイプです。`,
+    `相性${percent}%！${infoTip}を意識すると、すれ違いが減ります。`,
+    `相性は${percent}%。ポイントは「${heartTip}」です。`,
+    `相性${percent}%！${planTip}で毎日を整えると、ぐっと仲良し。`,
+  ];
+
+  const groupLines = {
+    NT: "考えるのが得意なかいぬしは、遊びを“ゲーム化”するととても相性が良いです。",
+    NF: "共感が得意なかいぬしは、安心を積むほど絆が育つ。",
+    SJ: "安定が得意なかいぬしは、ルーティンでうちのこを守れる。",
+    SP: "体験が得意なかいぬしは、短時間の刺激で満足度UP。",
+  };
+
+  const petFlavor = petD ? `うちのこは「${petD.name}」。得意を増やすほど信頼が深まります。` : "うちのこの得意を増やすほど信頼が深まります。";
+  const groupFlavor = (groupLines[hg] || groupLines["NF"]);
+
+  // タイプ組み合わせで文章を“固定ランダム”に（同じ組み合わせは同じ文章）
+  const seed = hashStr(pet + "x" + human);
+  const base = themes[seed % themes.length];
+
+  const extra = [
+    `ポイント：${heartTip}。`,
+    `ポイント：${energyTip}。`,
+    `ポイント：${infoTip}。`,
+    `ポイント：${planTip}。`,
+  ][seed % 4];
+
+  const text = `${base}
+${extra}
+${groupFlavor}
+${petFlavor}`;
+  return clampText(text, 200, 320);
 }
+
+
+function buildPetThought(pet, human){
+  // うちのこ（ペット）目線の“かいぬしへの本音”
+  const needsSpace = (pet[0]==="I");
+  const lovesTalk = (pet[2]==="F");
+  const likesRoutine = (pet[3]==="J");
+  const humanWarm = (human[2]==="F");
+  const humanPlan = (human[3]==="J");
+
+  const lines = [];
+
+  if(needsSpace){
+    lines.push("うちのこ心の声：ひとり時間も大事にしてもらえると、安心して甘えられます。");
+  }else{
+    lines.push("うちのこ心の声：一緒に動いてくれるとうれしいです。気分を共有できるとうれしいです。");
+  }
+
+  if(lovesTalk && humanWarm){
+    lines.push("言葉と空気がやさしいと安心できます。褒められると“もっと”が出るタイプです。");
+  }else if(lovesTalk && !humanWarm){
+    lines.push("ルールは分かるけど、たまに“よしよし”が欲しい。安心の合図があるとより安心できます。");
+  }else if(!lovesTalk && humanWarm){
+    lines.push("気持ちは嬉しいけど、ベタベタしすぎは照れるかも。近づいた時だけ撫でてね。");
+  }else{
+    lines.push("わかりやすい指示が助かります。できたらすぐ褒めて、ごほうびがあるとやる気が高まります。");
+  }
+
+  if(likesRoutine && humanPlan){
+    lines.push("毎日の合図や順番があると落ち着く。『いつもの』が増えるほど信頼が深まるよ。");
+  }else if(likesRoutine && !humanPlan){
+    lines.push("気まぐれも楽しいけど、寝る前だけでも“いつもの安心”があるとうれしいです。");
+  }else if(!likesRoutine && humanPlan){
+    lines.push("決めすぎより、遊びの選択肢をくれると才能が育ちやすいです。自由の中で学びたい！"); 
+  }else{
+    lines.push("その日の気分でいこう！でも不安な時は、そばにいてくれるだけで落ち着くよ。");
+  }
+
+  // 組み合わせで固定
+  const seed = hashStr("thought:" + pet + "x" + human);
+  const pick = lines[seed % lines.length];
+  // 追加で一文
+  const add = lines[(seed + 1) % lines.length];
+  return `\n${pick}\n${add}`;
+}
+
+function hashStr(s){
+  let h = 0;
+  for(let i=0;i<s.length;i++){
+    h = ((h<<5)-h) + s.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+}
+
 
 /* ---------- TYPES LIST / DETAIL ---------- */
 let typesRendered = false;
@@ -688,4 +836,20 @@ function toast(msg){
   el.style.opacity = "1";
   clearTimeout(toastTimer);
   toastTimer = setTimeout(()=>{ el.style.opacity="0"; }, 2000);
+}
+
+
+function setCompatDate(pet, human, percent){
+  const el = document.getElementById("compatDate");
+  const mini = document.querySelector(".compatCard__mini");
+  if(el){
+    const d = new Date();
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,"0");
+    const day = String(d.getDate()).padStart(2,"0");
+    el.textContent = `${y}.${m}.${day}`;
+  }
+  if(mini){
+    mini.textContent = `${pet} × ${human} ｜ ${percent}%`;
+  }
 }
