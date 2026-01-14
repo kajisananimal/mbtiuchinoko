@@ -821,3 +821,14 @@ document.addEventListener("click",(e)=>{
 window.addEventListener('error', (ev)=>{
   try{ toast("エラーが発生しました。更新して再度お試しください"); }catch(e){}
 });
+
+/* ===== QUIZ_BUTTON_DELEGATION_V8 =====
+   Some environments lose direct bindings if sections are re-rendered.
+   Delegate clicks for quiz action buttons.
+*/
+document.addEventListener("click",(e)=>{
+  const el = e.target && e.target.closest ? e.target.closest("#btnResult, #btnReset") : null;
+  if(!el) return;
+  if(el.id === "btnResult"){ onSubmitQuiz(); }
+  if(el.id === "btnReset"){ resetQuiz(); }
+});
