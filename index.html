@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>うちのこMBTI</title>
+
+  <!-- OGP (basic) -->
+  <meta property="og:title" content="うちのこMBTI" />
+  <meta property="og:description" content="ペットの性格をMBTI風に診断！結果カードを保存・シェアして楽しめます。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="ogp.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" id="goHome" role="button" aria-label="ホームへ">
+      <span class="brand__icon">🐾</span>
+      <span class="brand__text">うちのこMBTI</span>
+    </div>
+
+    <button class="chip" id="shareTop" title="リンクを共有">🔗 共有</button>
+  </header>
+
+  <main class="wrap">
+    <!-- HOME -->
+    <section class="view" id="view-home">
+      <h1 class="h1">うちのこMBTI</h1>
+      <p class="lead">ペットの“うちのこっぽさ”を、MBTI風に30問で診断！<br/>結果カードを保存してシェアもできます。</p>
+
+      <div class="menu">
+        <button class="btn btn-primary btn-big" data-nav="#quiz">診断開始</button>
+        <button class="btn btn-ghost btn-big" data-nav="#compat">かいぬしとの相性</button>
+        <button class="btn btn-ghost btn-big" data-nav="#types">タイプ一覧</button>
+        <button class="btn btn-ghost btn-big" id="copyLinkHome">リンクを共有</button>
+      </div>
+
+      <div class="note">
+        <div class="note__title">使い方</div>
+        <ul class="note__list">
+          <li>直感でポチポチ答えてOK</li>
+          <li>最後に結果カードが出ます（保存・Xシェア・リンク共有）</li>
+          <li>「かいぬしとの相性」で、人間MBTIとの相性も見れます</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="view" id="view-quiz" hidden>
+      <div class="panel">
+        <h2 class="h2">診断</h2>
+        <p class="sublead">直感で答えてOK。最後に結果カードがでます。かいぬしとの相性も見れます。</p>
+        <div class="progress">
+          <div class="progress__bar" id="progressBar"></div>
+        </div>
+        <div class="progress__meta">
+          <span id="progressText">0 / 30</span>
+          <button class="chip" id="scrollToBottom">最後へ</button>
+        </div>
+      </div>
+
+      <form id="quizForm" class="qwrap" autocomplete="off"></form>
+
+      <div class="actions">
+        <button class="btn btn-primary btn-xl" id="btnResult">結果を見る</button>
+        <button class="btn btn-ghost" id="btnReset">リセット</button>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section class="view" id="view-result" hidden>
+      <div class="panel">
+        <h2 class="h2">診断結果</h2>
+      </div>
+
+      <div class="cardWrap">
+        <div class="resultCard" id="resultCard">
+          <div class="resultCard__top">
+            <div class="badge" id="resultType">----</div>
+            <div class="resultName" id="resultCatch">タイプ名</div>
+          </div>
+
+          <div class="illus" id="resultIllus" aria-label="イラスト">
+            <!-- placeholder illustration -->
+            <svg viewBox="0 0 600 360" class="illus__svg" role="img" aria-label="イラスト（後で差し替え）">
+              <rect x="16" y="16" width="568" height="328" rx="28"></rect>
+              <text x="50%" y="46%" text-anchor="middle" dominant-baseline="middle">ILLUSTRATION</text>
+              <text x="50%" y="58%" text-anchor="middle" dominant-baseline="middle" class="small">（あとで指定する）</text>
+            </svg>
+          </div>
+
+          <div class="resultCard__body">
+            <div class="block">
+              <div class="block__title">基本特徴</div>
+              <div class="block__text" id="resultDesc"></div>
+            </div>
+
+            <div class="block">
+              <div class="block__title">好き / 嫌い / 得意 / 苦手</div>
+              <div class="block__text" id="resultLikes"></div>
+            </div>
+
+            <div class="mini">
+              <div class="mini__title">相性のいい人間MBTI</div>
+              <div class="mini__chips" id="resultGoodHumans"></div>
+            </div>
+          </div>
+
+          <div class="resultCard__foot">
+            <div class="stamp">#うちのこMBTI</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions grid">
+        <button class="btn btn-primary btn-xl" id="btnSaveCard">カードを保存</button>
+        <button class="btn btn-ghost" id="btnShareX">Xでシェア</button>
+        <button class="btn btn-ghost" id="btnShareLink">リンクを共有</button>
+        <button class="btn btn-ghost" data-nav="#quiz" id="btnAgain">もう一回</button>
+        <button class="btn btn-ghost" data-nav="#compat">かいぬしとの相性</button>
+      </div>
+
+      <div class="hint">
+        <div class="hint__title">保存のコツ</div>
+        <div class="hint__text">
+          iPhoneの場合、<b>「カードを保存」→共有シート</b>が出たら<b>「画像を保存」</b>を選ぶとアルバムに入ります（対応ブラウザで動きます）。<br/>
+          共有が出ない場合は、画像がダウンロードされるので長押し保存も試してください。
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPAT -->
+    <section class="view" id="view-compat" hidden>
+      <div class="panel">
+        <h2 class="h2">かいぬしとの相性</h2>
+        <p class="sublead">うちのこ（ペット）と、かいぬし（人間）のMBTIを選ぶだけで相性を表示します。</p>
+      </div>
+
+      <div class="compatForm">
+        <label class="field">
+          <div class="field__label">うちのこMBTI</div>
+          <select id="petTypeSelect" class="select"></select>
+        </label>
+
+        <label class="field">
+          <div class="field__label">かいぬしMBTI</div>
+          <select id="humanTypeSelect" class="select"></select>
+        </label>
+
+        <button class="btn btn-primary btn-xl" id="btnCompat">診断開始</button>
+      </div>
+
+      <div class="compatResult" id="compatResult" hidden>
+        <div class="compatScore">
+          <div class="compatScore__num" id="compatPercent">--%</div>
+          <div class="compatScore__meta">
+            <div class="compatScore__types" id="compatTypes">PET × HUMAN</div>
+            <div class="compatScore__tag">ペット×人間 相性</div>
+          </div>
+        </div>
+        <div class="compatText" id="compatText"></div>
+      </div>
+    </section>
+
+    <!-- TYPES LIST -->
+    <section class="view" id="view-types" hidden>
+      <div class="panel">
+        <h2 class="h2">タイプ一覧</h2>
+        <p class="sublead">ペット視点でのMBTIっぽい特徴まとめ。タップで詳細へ。</p>
+      </div>
+
+      <div class="typesGrid" id="typesGrid"></div>
+    </section>
+
+    <!-- TYPE DETAIL -->
+    <section class="view" id="view-type-detail" hidden>
+      <div class="panel">
+        <button class="chip" data-nav="#types">← 一覧へ</button>
+        <h2 class="h2" id="detailTitle">TYPE</h2>
+        <p class="sublead" id="detailCatch"></p>
+      </div>
+
+      <div class="detail">
+        <div class="detail__illus" id="detailIllus"></div>
+        <div class="detail__block">
+          <div class="block">
+            <div class="block__title">基本特徴</div>
+            <div class="block__text" id="detailDesc"></div>
+          </div>
+          <div class="block">
+            <div class="block__title">好き / 嫌い / 得意 / 苦手</div>
+            <div class="block__text" id="detailLikes"></div>
+          </div>
+
+          <div class="mini">
+            <div class="mini__title">相性のいい人間MBTI</div>
+            <div class="mini__chips" id="detailGoodHumans"></div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" data-nav="#quiz">このタイプを目指して診断する</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <div>© うちのこMBTI</div>
+        <div class="footer__right">
+          <button class="chip" id="copyLinkFooter">🔗 リンクを共有</button>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- libs -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
