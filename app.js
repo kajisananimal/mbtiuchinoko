@@ -869,7 +869,7 @@ window.addEventListener('error', (ev)=>{
 document.addEventListener("click",(e)=>{
   const el = e.target && e.target.closest ? e.target.closest("#btnResult, #btnReset") : null;
   if(!el) return;
-  if(el.id === "btnResult"){ onSubmitQuiz(); }
+  if(el.id === "btnResult"){ safeOnSubmitQuiz(); }
   if(el.id === "btnReset"){ resetQuiz(); }
 });
 
@@ -915,4 +915,26 @@ document.addEventListener("click",(e)=>{
   // force reflow
   void b.offsetWidth;
   b.classList.add("btn-pop");
+});
+
+/* ===== SAFE_ONSUBMIT_FINAL ===== */
+function safeOnSubmitQuiz(){
+  try{
+    onSubmitQuiz();
+  }catch(err){
+    console.error(err);
+    toast("結果を見る処理でエラーが出ました。更新して再度お試しください");
+  }
+}
+
+/* ===== PROMINENT_PURUN_V13 ===== */
+document.addEventListener("click",(e)=>{
+  const b = e.target && e.target.closest ? e.target.closest("button") : null;
+  if(!b) return;
+  const prominent = b.classList.contains("btn-primary") || b.classList.contains("btn-giant") ||
+                    b.classList.contains("btn-xl") || b.classList.contains("btn-big");
+  if(!prominent) return;
+  b.classList.remove("btn-purun");
+  void b.offsetWidth;
+  b.classList.add("btn-purun");
 });
