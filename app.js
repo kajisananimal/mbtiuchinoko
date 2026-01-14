@@ -190,6 +190,10 @@ const QUESTIONS = [
 
 function $(sel){ return document.querySelector(sel); }
 function $all(sel){ return Array.from(document.querySelectorAll(sel)); }
+function bindClick(id, fn){
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('click', fn);
+}
 
 function show(hash){
   const target = hash || "#home";
@@ -225,10 +229,14 @@ window.addEventListener("load", ()=>show(location.hash || "#home"));
 
 /* ---------- NAV ---------- */
 document.addEventListener("click",(e)=>{
-  const nav = e.target?.dataset?.nav;
-  if(nav){ location.hash = nav; }
+  const navEl = e.target && e.target.closest ? e.target.closest("[data-nav]") : null;
+  if(navEl && navEl.dataset && navEl.dataset.nav){
+    e.preventDefault();
+    location.hash = navEl.dataset.nav;
+  }
 });
-$("#goHome").addEventListener("click", ()=>location.hash="#home");
+
+bindClick("goHome", ()=>location.hash="#home");
 
 /* ---------- SHARE LINK ---------- */
 function getShareUrl(){
@@ -252,9 +260,9 @@ async function shareLink(){
   }
 }
 
-$("#shareTop").addEventListener("click", shareLink);
-$("#copyLinkHome").addEventListener("click", shareLink);
-$("#copyLinkFooter").addEventListener("click", shareLink);
+bindClick("shareTop", shareLink);
+bindClick("copyLinkHome", shareLink);
+bindClick("copyLinkFooter", shareLink);
 
 /* ---------- QUIZ RENDER ---------- */
 let quizRendered = false;
@@ -289,9 +297,9 @@ function renderQuiz(){
   });
 
   form.addEventListener("change", updateProgress);
-  $("#btnResult").addEventListener("click", onSubmitQuiz);
-  $("#btnReset").addEventListener("click", resetQuiz);
-  $("#scrollToBottom").addEventListener("click", ()=>window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"}));
+  bindClick("btnResult", onSubmitQuiz);
+  bindClick("btnReset", resetQuiz);
+  bindClick("scrollToBottom", ()=>window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"}));
 
   quizRendered = true;
   updateProgress();
@@ -522,7 +530,7 @@ function fillSelects(){
 
 fillSelects();
 
-$("#btnCompat").addEventListener("click", ()=>{
+bindClick("btnCompat", ()=>{
   const pet = $("#petTypeSelect").value;
   const human = $("#humanTypeSelect").value;
   const {percent, text} = calcCompat(pet, human);
@@ -780,4 +788,9 @@ document.addEventListener("click",(e)=>{
   if(e.target && e.target.id === "btnSaveCompat"){
     saveCompatCardToAlbum();
   }
+});
+
+/* ---------- SAFETY: show errors (helps debugging on mobile) ---------- */
+window.addEventListener('error', (ev)=>{
+  try{ toast("エラーが発生しました。更新して再度お試しください"); }catch(e){}
 });

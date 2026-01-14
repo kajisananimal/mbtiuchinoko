@@ -28,11 +28,17 @@
   <main class="wrap">
     <!-- HOME -->
     <section class="view" id="view-home">
-      <h1 class="h1">うちのこMBTI</h1>
-      <p class="lead">ペットの“うちのこっぽさ”を、MBTI風に30問で診断！<br/>結果カードを保存してシェアもできます。</p>
+      <div class="hero">
+        <div class="hero__stickers">
+          <span class="st s1">✨</span><span class="st s2">🐾</span><span class="st s3">🎀</span><span class="st s4">🌈</span>
+        </div>
+        <h1 class="h1 hero__title"><span class="hero__pop">うちのこ</span><span class="hero__mbti">MBTI</span></h1>
+        <p class="lead hero__lead">ペットの“うちのこっぽさ”を、MBTI風に30問で診断！<br/>結果カードを保存してシェアもできます。</p>
+        <div class="hero__badge">30問でサクッと診断 → 結果カード保存</div>
+      </div>
 
       <div class="menu">
-        <button class="btn btn-primary btn-big" data-nav="#quiz">診断開始</button>
+        <button class="btn btn-primary btn-big btn-home-primary" data-nav="#quiz">診断開始</button>
         <button class="btn btn-ghost btn-big" data-nav="#compat">かいぬしとの相性</button>
         <button class="btn btn-ghost btn-big" data-nav="#types">タイプ一覧</button>
         <button class="btn btn-ghost btn-big" id="copyLinkHome">リンクを共有</button>
