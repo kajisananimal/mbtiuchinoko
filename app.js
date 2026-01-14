@@ -332,8 +332,12 @@ function onSubmitQuiz(e){
   const type = calcTypeFromAnswers();
   localStorage.setItem("uchinoko_mbti_lastType", type);
   renderResult(type);
-  // hash change sometimes gets swallowed if DOM is still updating
-  setTimeout(()=>{ location.hash = "#result"; }, 0);
+  
+  // Navigate to result (bulletproof)
+  try{ history.pushState(null, "", "#result"); }catch(e){ location.hash = "#result"; }
+  // Ensure view is shown even if hashchange is swallowed
+  show("#result");
+  window.scrollTo({top:0, behavior:"smooth"});
 }
 
 /* ---------- TYPE CALC ---------- */
