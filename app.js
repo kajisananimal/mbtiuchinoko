@@ -597,63 +597,90 @@ function groupSynergy(pet, human){
 }
 
 
+
 function buildCompatText(pet, human, percent, match, bonus){
   const petD = PET_TYPE_DATA[pet];
   const pE = pet[0], pS = pet[1], pT = pet[2], pJ = pet[3];
   const hE = human[0], hS = human[1], hT = human[2], hJ = human[3];
 
+  // stable picker (so the same pair shows the same text)
+  const seed = (pet + "-" + human);
+  const pick = (arr)=>{
+    let h=0;
+    for(let i=0;i<seed.length;i++){ h = (h*31 + seed.charCodeAt(i)) >>> 0; }
+    return arr[h % arr.length];
+  };
+
   const vibe = (() => {
-    // based on groups
     const pg = groupOf(pet), hg = groupOf(human);
-    if(pg==="NF" && hg==="NF") return "おたがいの気持ちを大事にできる";
-    if(pg==="SJ" && hg==="SJ") return "毎日の安心感を作りやすい";
-    if(pg==="SP" && hg==="SP") return "楽しい体験を一緒に増やせる";
-    if(pg==="NT" && hg==="NT") return "ルールと工夫で暮らしが整う";
-    if(pg==="NF" && hg==="SJ") return "やさしさ×安定で落ち着きやすい";
-    if(pg==="SJ" && hg==="NF") return "安心の中で甘えが育ちやすい";
-    if(pg==="SP" && hg==="SJ") return "遊びと生活リズムのバランスが取りやすい";
-    if(pg==="SJ" && hg==="SP") return "刺激をほどよく取り入れられる";
-    if(pg==="NT" && hg==="NF") return "考え方と気持ちが補い合える";
-    if(pg==="NF" && hg==="NT") return "気持ちを言葉にして理解が深まる";
-    return "ほどよく補い合える";
+    const map = {
+      "NFNF":"おたがいの気持ちを大事にできる",
+      "SJSJ":"毎日の安心感を作りやすい",
+      "SPSP":"楽しい体験を一緒に増やせる",
+      "NTNT":"ルールと工夫で暮らしが整う",
+      "NFSJ":"やさしさ×安定で落ち着きやすい",
+      "SJNF":"安心の中で甘えが育ちやすい",
+      "SPSJ":"遊びと生活リズムのバランスが取りやすい",
+      "SJSP":"刺激をほどよく取り入れられる",
+      "NTNF":"考え方と気持ちが補い合える",
+      "NFNT":"気持ちを言葉にして理解が深まる",
+      "NTSJ":"ルールがあるほど安心して動ける",
+      "SJNT":"段取りがあると信頼が深まる",
+      "NFSP":"気分転換が上手にできる",
+      "SPNF":"楽しい中で安心も育つ",
+      "NTSP":"遊びを“ゲーム化”すると伸びる",
+      "SPNT":"短く明確だとまとまりやすい",
+    };
+    return map[pg+hg] || "ほどよく補い合える";
   })();
 
-  const approach = (() => {
-    const a = [];
-    a.push(hT==="F" ? "共感と安心の声かけ" : "わかりやすいルールづくり");
-    a.push(hJ==="J" ? "いつもの流れを少し整える" : "その日の気分に合わせて試す");
-    a.push(hE==="E" ? "こまめにリアクションする" : "見守りつつ必要な時に寄り添う");
-    return a.join("・");
-  })();
+  const humanStrength = pick([
+    hT==="F" ? "やさしい声かけ" : "わかりやすいルール",
+    hJ==="J" ? "生活リズムの安定" : "柔軟な対応力",
+    hE==="E" ? "明るいリアクション" : "落ち着いた見守り",
+  ]);
 
-  const petThought = (() => {
-    // pet POV: depends on pet's EI and TF
-    if(pE==="E" && pT==="F") return "「いっしょにいるだけでうれしい！」って思っています。";
-    if(pE==="E" && pT==="T") return "「楽しいこと、いっしょに増やそう！」って思っています。";
-    if(pE==="I" && pT==="F") return "「安心できる場所にしてくれてありがとう」って思っています。";
-    return "「静かに見守ってくれるの、助かるな」って思っています。";
-  })();
+  const petWish = pick([
+    pE==="E" ? "いっしょに遊ぶ時間" : "静かに安心できる時間",
+    pS==="S" ? "いつもの安心" : "ちょっとした新鮮さ",
+    pJ==="J" ? "決まった流れ" : "気まぐれもOKな余白",
+  ]);
 
-  const caution = (() => {
-    // gentle nudge based on mismatch
-    const tips = [];
-    if(pS!==hS) tips.push("新しい刺激は少しずつ、安心の合図もセットで");
-    if(pJ!==hJ) tips.push("“いつも通り”と“気まぐれ”を半分ずつくらい");
-    if(pE!==hE) tips.push("距離感はその日の表情に合わせてOK");
-    if(pT!==hT) tips.push("叱るより、できた瞬間を褒めてあげると伸びやすい");
-    if(!tips.length) tips.push("今のやり方で十分うまくいっています");
-    return tips.slice(0,2).join("／");
-  })();
+  const petThought = pick([
+    "あなたのそばがいちばん落ち着く場所です。",
+    "今日もいっしょにいられてうれしいです。",
+    "ちゃんと見てくれているのが伝わって安心しています。",
+    "小さな優しさが、うちのこの自信になっています。",
+    "あなたの声は“安心の合図”になっています。",
+  ]);
 
-  const lines = [
+  const tips = [];
+  if(pS!==hS) tips.push("新しい刺激は少しずつ、安心の合図もセットで");
+  if(pJ!==hJ) tips.push("“いつも通り”と“気まぐれ”を半分ずつくらい");
+  if(pE!==hE) tips.push("距離感はその日の表情に合わせてOK");
+  if(pT!==hT) tips.push("叱るより、できた瞬間を褒めてあげると伸びやすい");
+  const tipLine = tips.length ? pick(tips.slice(0,2)) : "今のやり方で十分うまくいっています";
+
+  const openers = [
     `相性度は${percent}%。この組み合わせは、${vibe}相性です。`,
-    `コツは「${approach}」。${caution}の意識があると、もっと穏やかに過ごせます。`,
-    `うちのこはあなたに対して、${petThought}無理に完璧を目指さなくても、日々のやさしさはちゃんと伝わっています。`
+    `相性度${percent}%。${vibe}関係になりやすい組み合わせです。`,
+    `相性度は${percent}%。${vibe}ので、いっしょに暮らしやすいです。`,
   ];
+  const opener = pick(openers);
 
-  // 200〜300字に整える
-  const all = lines.join("
-");
+  const mid = pick([
+    `ポイントは「${humanStrength}」。${tipLine}を意識すると、もっと穏やかに過ごせます。`,
+    `カギは「${humanStrength}」と「${petWish}」。${tipLine}ができると信頼が深まります。`,
+    `うまくいくコツは「${humanStrength}」。${tipLine}で、うちのこの安心感が増えます。`,
+  ]);
+
+  const close = pick([
+    `うちのこは、あなたに対して「${petThought}」と思っています。完璧じゃなくても大丈夫。日々のやさしさはちゃんと届いています。`,
+    `うちのこは「${petThought}」と感じています。焦らず今のペースで、やさしい時間を重ねていける関係です。`,
+    `うちのこは「${petThought}」という気持ち。小さな積み重ねがいちばんの愛情です。これからも安心を育てていけます。`,
+  ]);
+
+  const all = [opener, mid, close].join("\n");
   return clampText(all, 200, 300);
 }
 
@@ -753,7 +780,7 @@ function toast(msg){
 async function saveCompatCardToAlbum(){
   const card = document.getElementById("compatCard");
   if(!card){
-    toast("相性結果がまだ出ていません");
+    toast("相性結果を出してから保存してね");
     return;
   }
   toast("相性カードを画像化中…");
@@ -785,7 +812,7 @@ async function saveCompatCardToAlbum(){
 }
 
 document.addEventListener("click",(e)=>{
-  if(e.target && e.target.id === "btnSaveCompat"){
+  if(e.target && (e.target.id === "btnSaveCompat" || e.target.closest?.("#btnSaveCompat"))){
     saveCompatCardToAlbum();
   }
 });
