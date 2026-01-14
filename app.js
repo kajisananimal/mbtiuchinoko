@@ -948,3 +948,12 @@ document.addEventListener("click",(e)=>{
   void b.offsetWidth;
   b.classList.add("btn-purun");
 });
+
+/* ===== PURUN_ALL_V17 ===== */
+document.addEventListener("click",(e)=>{
+  const b = e.target && e.target.closest ? e.target.closest("button") : null;
+  if(!b) return;
+  b.classList.remove("btn-purun");
+  void b.offsetWidth;
+  b.classList.add("btn-purun");
+});
