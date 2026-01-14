@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>うちのこMBTI</title>
-  <meta name="theme-color" content="#ff3d8d">
 
   <!-- OGP (basic) -->
   <meta property="og:title" content="うちのこMBTI" />
@@ -29,17 +28,20 @@
   <main class="wrap">
     <!-- HOME -->
     <section class="view" id="view-home">
-      <div class="hero">
-        <div class="hero__stickers">
-          <span class="st s1">✨</span><span class="st s2">🐾</span><span class="st s3">🎀</span><span class="st s4">🌈</span>
-        </div>
-        <h1 class="h1 hero__title"><span class="hero__pop">うちのこ</span><span class="hero__mbti">MBTI</span></h1>
-        <p class="lead hero__lead">ペットの“うちのこっぽさ”を、MBTI風に30問で診断！<br/>結果カードを保存してシェアもできます。</p>
-        <div class="hero__badge">30問でサクッと診断 → 結果カード保存</div>
+    <div class="heroCard" aria-label="サイト紹介">
+      <div class="heroLogo" aria-label="うちのこMBTI ロゴ">
+        <span class="heroPill heroPill--light">うちのこ</span>
+        <span class="heroPill heroPill--grad">MBTI</span>
       </div>
+      <p class="heroLead">ペットの“うちのこっぽさ”を、MBTI風に30問で診断。<br/>結果カードを保存して、シェアも楽しめます。</p>
+      <div class="heroCTA">
+        <button class="btn btn-primary btn-xl" data-nav="#quiz">30問でサクッと診断 → 結果カード保存</button>
+      </div>
+    </div>
 
-      <div class="menu">
-        <button class="btn btn-primary btn-big btn-home-primary" data-nav="#quiz">診断開始</button>
+
+<div class="menu">
+        <button class="btn btn-primary btn-big" data-nav="#quiz">診断開始</button>
         <button class="btn btn-ghost btn-big" data-nav="#compat">かいぬしとの相性</button>
         <button class="btn btn-ghost btn-big" data-nav="#types">タイプ一覧</button>
         <button class="btn btn-ghost btn-big" id="copyLinkHome">リンクを共有</button>
@@ -90,14 +92,26 @@
             <div class="resultName" id="resultCatch">タイプ名</div>
           </div>
 
+          
           <div class="illus" id="resultIllus" aria-label="イラスト">
-            <!-- placeholder illustration -->
-            <svg viewBox="0 0 600 360" class="illus__svg" role="img" aria-label="イラスト（後で差し替え）">
-              <rect x="16" y="16" width="568" height="328" rx="28"></rect>
-              <text x="50%" y="46%" text-anchor="middle" dominant-baseline="middle">ILLUSTRATION</text>
-              <text x="50%" y="58%" text-anchor="middle" dominant-baseline="middle" class="small">（あとで指定する）</text>
-            </svg>
+            <div class="illusBox">
+              <img id="resultImg" class="illusImg" alt="結果イラスト" />
+              <div id="illusFallback" class="illusFallback" hidden>
+                <svg viewBox="0 0 600 360" class="illus__svg" role="img" aria-label="イラスト（後で差し替え）">
+                  <rect x="16" y="16" width="568" height="328" rx="28"></rect>
+                  <text x="50%" y="46%" text-anchor="middle" dominant-baseline="middle">ILLUSTRATION</text>
+                  <text x="50%" y="58%" text-anchor="middle" dominant-baseline="middle" class="small">（あとで指定する）</text>
+                </svg>
+              </div>
+            </div>
+
+            <input id="customPhotoInput" type="file" accept="image/*" hidden />
+            <div class="illusActions">
+              <button class="btn btn-ghost" id="btnChangePhoto" type="button">写真を変更</button>
+              <button class="btn btn-ghost" id="btnResetPhoto" type="button">デフォルトに戻す</button>
+            </div>
           </div>
+
 
           <div class="resultCard__body">
             <div class="block">
@@ -160,23 +174,40 @@
         <button class="btn btn-primary btn-xl" id="btnCompat">診断開始</button>
       </div>
 
-      <div class="compatActions">
-  <button type="button" class="btn btn-primary btn-xl" id="btnSaveCompat">結果を保存</button>
-</div>
-<div class="compatResult" id="compatResult" hidden>
-  <div class="compatCard" id="compatCard">
-        <div class="compatScore">
+      <div class="compatResult" id="compatResult" hidden>
+        <div class="compatCard" id="compatCard">
+          <div class="compatCard__head">
+            <div class="compatCard__brand">
+              <div class="compatCard__icon">🐾</div>
+              <div class="compatCard__title">
+                <div class="compatCard__name">うちのこMBTI</div>
+                <div class="compatCard__sub">かいぬしとの相性カード</div>
+              </div>
+            </div>
+            <div class="compatCard__tag">#うちのこMBTI</div>
+          </div>
+
+          <div class="compatScore">
           <div class="compatScore__num" id="compatPercent">--%</div>
           <div class="compatScore__meta">
             <div class="compatScore__types" id="compatTypes">PET × HUMAN</div>
             <div class="compatScore__tag">ペット×人間 相性</div>
           </div>
         </div>
-        <div class="compatText" id="compatText"></div>
-        <div class="compatStamp">#うちのこMBTI</div>
-      </div>
-    </div>
 
+          <div class="compatText" id="compatText"></div>
+
+          <div class="compatCard__foot">
+            <div class="compatCard__date" id="compatDate"></div>
+            <div class="compatCard__mini">PET × HUMAN</div>
+          </div>
+        </div>
+
+        <div class="actions" style="margin-top:14px">
+          <button class="btn btn-primary btn-xl" id="btnSaveCompat" type="button">結果を保存</button>
+          <button class="btn btn-ghost" id="btnCompatLink" type="button">リンクを共有</button>
+        </div>
+      </div>
     </section>
 
     <!-- TYPES LIST -->
