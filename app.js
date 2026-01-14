@@ -188,21 +188,6 @@ const QUESTIONS = [
   {dim:"JP", a:"やることが終わるまで集中", b:"途中で別のことに興味が移る", aL:"J", bL:"P"},
 ];
 
-
-function bindQuizButtonsOnce(){
-  const resultBtn = document.getElementById("btnResult");
-  const resetBtn = document.getElementById("btnReset");
-  if(resultBtn && !resultBtn.dataset.bound){
-    resultBtn.addEventListener("click", onSubmitQuiz);
-    resultBtn.dataset.bound = "1";
-  }
-  if(resetBtn && !resetBtn.dataset.bound){
-    resetBtn.addEventListener("click", resetQuiz);
-    resetBtn.dataset.bound = "1";
-  }
-}
-
-
 function $(sel){ return document.querySelector(sel); }
 function $all(sel){ return Array.from(document.querySelectorAll(sel)); }
 
@@ -228,7 +213,7 @@ function show(hash){
   const id = map[target] || "#view-home";
   $(id).hidden = false;
 
-  if(target==="#quiz"){ renderQuiz(); bindQuizButtonsOnce(); }
+  if(target==="#quiz") renderQuiz();
   if(target==="#types") renderTypesGrid();
   if(target==="#result") window.scrollTo({top:0, behavior:"smooth"});
 
@@ -236,17 +221,7 @@ function show(hash){
 }
 
 window.addEventListener("hashchange", ()=>show(location.hash));
-window.addEventListener("load", ()=>{ bindQuizButtonsOnce();   // extra buttons
-  const saveCompatBtn = document.getElementById("btnSaveCompat");
-  if(saveCompatBtn && !saveCompatBtn.dataset.bound){ saveCompatBtn.addEventListener("click", saveCompatToAlbum); saveCompatBtn.dataset.bound="1"; }
-  const compatLinkBtn = document.getElementById("btnCompatLink");
-  if(compatLinkBtn && !compatLinkBtn.dataset.bound){ compatLinkBtn.addEventListener("click", shareLink); compatLinkBtn.dataset.bound="1"; }
-  const changeBtn = document.getElementById("btnChangePhoto");
-  if(changeBtn && !changeBtn.dataset.bound){ changeBtn.addEventListener("click", ()=>{ const t=document.getElementById("resultType").textContent.trim(); pickCustomPhoto(t); }); changeBtn.dataset.bound="1"; }
-  const resetBtn = document.getElementById("btnResetPhoto");
-  if(resetBtn && !resetBtn.dataset.bound){ resetBtn.addEventListener("click", ()=>{ const t=document.getElementById("resultType").textContent.trim(); resetCustomPhoto(t); }); resetBtn.dataset.bound="1"; }
-  show(location.hash || "#home");
-});
+window.addEventListener("load", ()=>show(location.hash || "#home"));
 
 /* ---------- NAV ---------- */
 document.addEventListener("click",(e)=>{
@@ -357,7 +332,8 @@ function onSubmitQuiz(e){
   const type = calcTypeFromAnswers();
   localStorage.setItem("uchinoko_mbti_lastType", type);
   renderResult(type);
-  location.hash = "#result";
+  // hash change sometimes gets swallowed if DOM is still updating
+  setTimeout(()=>{ location.hash = "#result"; }, 0);
 }
 
 /* ---------- TYPE CALC ---------- */
@@ -520,40 +496,7 @@ async function saveCardToAlbum(){
   toast("画像をダウンロードしました");
 }
 
-async function saveCompatToAlbum(){
-  const box = document.getElementById("compatCard") || document.getElementById("compatResult");
-  if(!box || box.hidden){
-    toast("先に相性診断をしてね");
-    return;
-  }
-  toast("相性カードを画像化中…");
-  const canvas = await html2canvas(box, {backgroundColor: "#ffffff", scale: 2, useCORS: true});
-  const blob = await new Promise(res=>canvas.toBlob(res, "image/png", 1.0));
-  if(!blob){
-    toast("画像の作成に失敗しました");
-    return;
-  }
-  const file = new File([blob], "uchinoko-compat.png", {type:"image/png"});
-  try{
-    if(navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){
-      await navigator.share({files:[file], title:"うちのこMBTI 相性", text:"相性カード"});
-      toast("共有シートを開きました（画像を保存を選んでね）");
-      return;
-    }
-  }catch(err){}
-
-  const a = document.createElement("a");
-  const objUrl = URL.createObjectURL(blob);
-  a.href = objUrl;
-  a.download = "uchinoko-compat.png";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(()=>URL.revokeObjectURL(objUrl), 8000);
-  toast("画像をダウンロードしました");
-}
-
- /* ---------- COMPAT ---------- */
+/* ---------- COMPAT ---------- */
 function fillSelects(){
   const petSel = $("#petTypeSelect");
   const humanSel = $("#humanTypeSelect");
@@ -641,6 +584,66 @@ function groupSynergy(pet, human){
   return clampInt(bonus, -8, 8);
 }
 
+
+function buildCompatText(pet, human, percent, match, bonus){
+  const petD = PET_TYPE_DATA[pet];
+  const pE = pet[0], pS = pet[1], pT = pet[2], pJ = pet[3];
+  const hE = human[0], hS = human[1], hT = human[2], hJ = human[3];
+
+  const vibe = (() => {
+    // based on groups
+    const pg = groupOf(pet), hg = groupOf(human);
+    if(pg==="NF" && hg==="NF") return "おたがいの気持ちを大事にできる";
+    if(pg==="SJ" && hg==="SJ") return "毎日の安心感を作りやすい";
+    if(pg==="SP" && hg==="SP") return "楽しい体験を一緒に増やせる";
+    if(pg==="NT" && hg==="NT") return "ルールと工夫で暮らしが整う";
+    if(pg==="NF" && hg==="SJ") return "やさしさ×安定で落ち着きやすい";
+    if(pg==="SJ" && hg==="NF") return "安心の中で甘えが育ちやすい";
+    if(pg==="SP" && hg==="SJ") return "遊びと生活リズムのバランスが取りやすい";
+    if(pg==="SJ" && hg==="SP") return "刺激をほどよく取り入れられる";
+    if(pg==="NT" && hg==="NF") return "考え方と気持ちが補い合える";
+    if(pg==="NF" && hg==="NT") return "気持ちを言葉にして理解が深まる";
+    return "ほどよく補い合える";
+  })();
+
+  const approach = (() => {
+    const a = [];
+    a.push(hT==="F" ? "共感と安心の声かけ" : "わかりやすいルールづくり");
+    a.push(hJ==="J" ? "いつもの流れを少し整える" : "その日の気分に合わせて試す");
+    a.push(hE==="E" ? "こまめにリアクションする" : "見守りつつ必要な時に寄り添う");
+    return a.join("・");
+  })();
+
+  const petThought = (() => {
+    // pet POV: depends on pet's EI and TF
+    if(pE==="E" && pT==="F") return "「いっしょにいるだけでうれしい！」って思っています。";
+    if(pE==="E" && pT==="T") return "「楽しいこと、いっしょに増やそう！」って思っています。";
+    if(pE==="I" && pT==="F") return "「安心できる場所にしてくれてありがとう」って思っています。";
+    return "「静かに見守ってくれるの、助かるな」って思っています。";
+  })();
+
+  const caution = (() => {
+    // gentle nudge based on mismatch
+    const tips = [];
+    if(pS!==hS) tips.push("新しい刺激は少しずつ、安心の合図もセットで");
+    if(pJ!==hJ) tips.push("“いつも通り”と“気まぐれ”を半分ずつくらい");
+    if(pE!==hE) tips.push("距離感はその日の表情に合わせてOK");
+    if(pT!==hT) tips.push("叱るより、できた瞬間を褒めてあげると伸びやすい");
+    if(!tips.length) tips.push("今のやり方で十分うまくいっています");
+    return tips.slice(0,2).join("／");
+  })();
+
+  const lines = [
+    `相性度は${percent}%。この組み合わせは、${vibe}相性です。`,
+    `コツは「${approach}」。${caution}の意識があると、もっと穏やかに過ごせます。`,
+    `うちのこはあなたに対して、${petThought}無理に完璧を目指さなくても、日々のやさしさはちゃんと伝わっています。`
+  ];
+
+  // 200〜300字に整える
+  const all = lines.join("
+");
+  return clampText(all, 200, 300);
+}
 
 /* ---------- TYPES LIST / DETAIL ---------- */
 let typesRendered = false;
@@ -734,102 +737,43 @@ function toast(msg){
   toastTimer = setTimeout(()=>{ el.style.opacity="0"; }, 2000);
 }
 
-function setCompatDate(pet, human, percent){
-  const el = document.getElementById("compatDate");
-  const mini = document.querySelector(".compatCard__mini");
-  if(el){
-    const d = new Date();
-    const y = d.getFullYear();
-    const m = String(d.getMonth()+1).padStart(2,"0");
-    const day = String(d.getDate()).padStart(2,"0");
-    el.textContent = `${y}.${m}.${day}`;
+/* ---------- SAVE COMPAT CARD ---------- */
+async function saveCompatCardToAlbum(){
+  const card = document.getElementById("compatCard");
+  if(!card){
+    toast("相性結果がまだ出ていません");
+    return;
   }
-  if(mini){
-    mini.textContent = `${pet} × ${human} ｜ ${percent}%`;
+  toast("相性カードを画像化中…");
+  const canvas = await html2canvas(card, {backgroundColor: "#ffffff", scale: 2, useCORS: true});
+  const blob = await new Promise(res=>canvas.toBlob(res, "image/png", 1.0));
+  if(!blob){
+    toast("画像の作成に失敗しました");
+    return;
   }
+  const file = new File([blob], "uchinoko-compat.png", {type:"image/png"});
+  try{
+    if(navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){
+      await navigator.share({files:[file], title:"うちのこMBTI 相性結果", text:"相性カード"});
+      toast("共有シートを開きました（画像を保存を選んでね）");
+      return;
+    }
+  }catch(e){ /* cancelled */ }
+
+  // fallback download
+  const a = document.createElement("a");
+  const objUrl = URL.createObjectURL(blob);
+  a.href = objUrl;
+  a.download = "uchinoko-compat.png";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(objUrl), 8000);
+  toast("画像をダウンロードしました");
 }
 
-
-function buildCompatText(pet, human, percent, match, bonus){
-  const petD = PET_TYPE_DATA[pet];
-  const hg = groupOf(human);
-
-  const energyTip = (pet[0]===human[0])
-    ? (pet[0]==="E" ? "いっしょにテンポよく遊べると、気持ちが通じやすいです。" : "静かな時間を共有できると、安心して距離が近づきます。")
-    : (pet[0]==="E" ? "うちのこは関わりがあると元気に。短時間でも“濃く”遊ぶと満たされます。" : "うちのこはひとり時間も大切。見守り多めだと、自然に寄ってきます。");
-
-  const infoTip = (pet[1]===human[1])
-    ? (pet[1]==="S" ? "“いつもの流れ”を作ると落ち着きやすいです。" : "新しい遊びやコースを少しずつ試すと、わくわくが続きます。")
-    : (pet[1]==="S" ? "環境の変化は小さく刻むと安心しやすいです。" : "好奇心が満たされる工夫があると、のびのびしやすいです。");
-
-  const heartTip = (human[2]==="F")
-    ? "やさしい声かけや安心の合図が、いちばんの支えになります。"
-    : "ルールを短く明確にして、できたらすぐ褒めると伝わりやすいです。";
-
-  const planTip = (human[3]==="J")
-    ? "時間と順番をある程度そろえると、安心が増えます。"
-    : "気分に合わせて遊びの種類を変えると、飽きにくいです。";
-
-  const groupLine = ({
-    NT:"考えるのが得意なかいぬしは、遊びを“ゲーム化”すると上手にハマります。",
-    NF:"気持ちに寄り添えるかいぬしは、安心を積み重ねるほど絆が育ちます。",
-    SJ:"安定が得意なかいぬしは、毎日のルーティンでうちのこを守れます。",
-    SP:"体験が得意なかいぬしは、短い刺激をこまめに入れると満足度が上がります。",
-  })[hg] || "おたがいのペースを尊重できると、毎日がもっと心地よくなります。";
-
-  const baseSet = [
-    `相性は${percent}%。おたがいの“ちょうどいい距離”を見つけやすい組み合わせです。`,
-    `相性は${percent}%。関わり方が合うと、安心感がぐっと増えます。`,
-    `相性は${percent}%。コツを押さえると、毎日がさらに過ごしやすくなります。`,
-    `相性は${percent}%。小さな積み重ねで、信頼が育ちやすいペアです。`,
-  ];
-  const seed = hashStr(pet + "x" + human);
-  const base = baseSet[seed % baseSet.length];
-
-  const petFlavor = petD ? `うちのこは「${petD.name}」。得意を増やしていくほど、信頼が深まりやすいです。` : "うちのこの得意を増やしていくほど、信頼が深まりやすいです。";
-  const thought = buildPetThought(pet, human);
-
-  const text = `${base}\nポイント：${heartTip}\nポイント：${energyTip}\n${infoTip}\n${groupLine}\n${petFlavor}\n${thought}`;
-  return clampText(text, 200, 320);
-}
-
-function buildPetThought(pet, human){
-  // うちのこ（ペット）目線の“かいぬしへの本音”（やさしめ）
-  const needsSpace = (pet[0]==="I");
-  const sensitive = (pet[2]==="F");
-  const likesRoutine = (pet[3]==="J");
-  const humanWarm = (human[2]==="F");
-  const humanPlan = (human[3]==="J");
-
-  const lines = [];
-
-  lines.push(needsSpace
-    ? "うちのこ心の声：ひとりの時間もそっと守ってもらえると、安心して甘えに行けます。"
-    : "うちのこ心の声：いっしょに動いてくれると心強いです。気持ちを共有できると、もっと仲良しになれます。"
-  );
-
-  if(sensitive && humanWarm){
-    lines.push("やさしい声や空気だと落ち着きます。できた時に“よくできたね”って言ってもらえると嬉しいです。");
-  }else if(sensitive && !humanWarm){
-    lines.push("ルールは分かるけど、たまに“安心の合図”があるとホッとします。そっと撫でてもらえると元気が出ます。");
-  }else if(!sensitive && humanWarm){
-    lines.push("気持ちは嬉しいけど、少し照れることも。近づいた時だけ撫でてもらえると、ちょうどいいです。");
-  }else{
-    lines.push("短く分かりやすい合図が助かります。できたらすぐ褒めてもらえると、やる気が高まります。");
+document.addEventListener("click",(e)=>{
+  if(e.target && e.target.id === "btnSaveCompat"){
+    saveCompatCardToAlbum();
   }
-
-  if(likesRoutine && humanPlan){
-    lines.push("毎日の合図や順番があると落ち着きます。『いつもの安心』が増えるほど、信頼が深まります。");
-  }else if(likesRoutine && !humanPlan){
-    lines.push("気まぐれも楽しいけど、寝る前だけでも“いつもの安心”があると嬉しいです。");
-  }else if(!likesRoutine && humanPlan){
-    lines.push("決めすぎより、選べる余地があると伸びやすいです。自由の中で学びたい気持ちがあります。");
-  }else{
-    lines.push("その日の気分でゆっくりいきたいです。不安な時は、そばにいてくれるだけで落ち着きます。");
-  }
-
-  const seed = hashStr("thought:" + pet + "x" + human);
-  const pick = lines[seed % lines.length];
-  const add = lines[(seed + 1) % lines.length];
-  return `${pick}\n${add}`;
-}
+});
