@@ -31,6 +31,7 @@ a{color:inherit}
   padding:12px 14px;
   display:flex; align-items:center; justify-content:space-between;
   background: rgba(11,12,16,.65);
+  backdrop-filter: blur(10px);
   border-bottom:1px solid var(--line);
 }
 .brand{display:flex; gap:10px; align-items:center; cursor:pointer; user-select:none}
@@ -217,6 +218,168 @@ a{color:inherit}
   padding:14px 14px;
   cursor:pointer;
 }
+
+/* =========================================================
+   Pastel Global Theme (match Home design) + iOS layout fix
+   ========================================================= */
+
+/* Base background: use provided assets (no fixed background on iOS) */
+body{
+  background: url("assets/home/bg/bg_gradient@2x.png") center / cover no-repeat;
+  background-attachment: scroll;
+  color:#2b2b3a;
+}
+
+/* Sticky header: pastel, avoid heavy blur that breaks on iOS */
+.topbar{
+  background: rgba(255,255,255,.72);
+  border-bottom: 1px solid rgba(140,140,180,.20);
+  box-shadow: 0 10px 30px rgba(40,40,80,.08);
+  backdrop-filter: none;
+}
+.brand__logo{height:34px; width:auto; display:block}
+.topnav{display:flex; gap:10px; align-items:center}
+.chip{
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(140,140,180,.25);
+  color:#3b3b58;
+}
+.chip--nav{padding:10px 14px; font-weight:900}
+.chip--pink{background: linear-gradient(180deg, rgba(255,226,238,.95), rgba(255,206,226,.92)); border-color: rgba(255,120,170,.35)}
+
+/* Panels: soft white card */
+.panel{
+  background: rgba(255,255,255,.66);
+  border: 1px solid rgba(140,140,180,.18);
+  box-shadow: 0 18px 50px rgba(55,55,90,.10);
+}
+
+/* ---------------- Home hero ---------------- */
+.panel--hero{
+  position: relative;
+  padding: 22px 18px 20px;
+  border-radius: 30px;
+  /* IMPORTANT: don't clip contents (iOS Safari can glitch and slice images) */
+  overflow: visible;
+  /* Use CSS-made "blank" card background to avoid duplicating screenshot artwork */
+  background:
+    radial-gradient(1200px 420px at 50% -10%, rgba(255,255,255,.85), rgba(255,255,255,.55) 55%, rgba(255,255,255,.62)),
+    radial-gradient(circle at 14px 14px, rgba(255,255,255,.65) 0 2px, transparent 2px) 0 0 / 16px 16px;
+}
+.panel--hero > *{position:relative; z-index:1}
+
+.home{display:flex; justify-content:center}
+.heroTags{display:grid; gap:10px; justify-items:center; margin-top:6px}
+.tag{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(130,130,170,.22);
+  background: rgba(255,255,255,.82);
+  font-weight:900;
+  color:#4a4a6a;
+}
+.tagRow{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
+.tag--gold{
+  background: linear-gradient(180deg, rgba(255,240,195,.95), rgba(255,220,140,.92));
+  border-color: rgba(220,160,70,.35);
+  color:#6b4b1f;
+}
+
+.heroLogoWrap{display:flex; justify-content:center; margin:12px 0 6px}
+.heroLogo{
+  width:min(520px, 92%);
+  height:auto;
+  display:block;
+  transform:none; /* iOS glitch guard */
+}
+
+.heroRibbon{position:relative; display:flex; justify-content:center; margin:8px 0 14px}
+.heroRibbon__bg{width:min(620px, 96%); height:auto; display:block; transform:none}
+.heroRibbon__text{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight:1000;
+  color:#fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,.12);
+  line-height:1.25;
+}
+
+.heroCtas{display:grid; gap:12px; justify-items:center}
+.heroCtas__row{display:grid; grid-template-columns: 1fr 1fr; gap:12px; width:min(640px, 96%)}
+@media (max-width:520px){ .heroCtas__row{grid-template-columns:1fr} }
+
+/* Characters: decorative, keep inside panel visually */
+.heroChara{position:absolute; bottom:16px; width:120px; z-index:1; opacity:.95}
+.heroChara img{width:100%; height:auto; display:block; transform:none}
+.heroChara--left{left:16px}
+.heroChara--right{right:16px}
+@media (max-width:420px){
+  .heroChara{display:none}
+}
+
+/* ---------------- Buttons (glossy + purun) ---------------- */
+.btn{
+  border: 1px solid rgba(140,140,180,.25);
+  background: rgba(255,255,255,.85);
+  color:#3b3b58;
+  border-radius: 999px;
+  box-shadow: 0 10px 26px rgba(55,55,90,.10);
+}
+.btn--xl{padding:16px 18px; font-size:18px}
+.btn--primary{
+  background: linear-gradient(180deg, rgba(255,200,120,1), rgba(255,150,90,1));
+  border-color: rgba(255,150,90,.65);
+  color:#fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,.12);
+}
+.btn--blue{
+  background: linear-gradient(180deg, rgba(150,215,255,1), rgba(90,170,255,1));
+  border-color: rgba(90,170,255,.55);
+  color:#fff;
+}
+.btn--pink{
+  background: linear-gradient(180deg, rgba(255,175,210,1), rgba(255,120,175,1));
+  border-color: rgba(255,120,175,.55);
+  color:#fff;
+}
+.btn__icon{margin-right:8px}
+
+@keyframes purun{
+  0%{transform:scale(1)}
+  35%{transform:scale(.92)}
+  70%{transform:scale(1.04)}
+  100%{transform:scale(1)}
+}
+.btn:active, .chip:active{animation: purun .28s ease}
+
+/* ---------------- Quiz options: round pastel buttons ---------------- */
+.opt{padding:0; border:none; background:transparent}
+.opt input{display:none}
+.opt span{
+  display:block;
+  width:100%;
+  padding:14px 14px;
+  border-radius: 20px;
+  border:1px solid rgba(140,140,180,.22);
+  background: rgba(255,255,255,.82);
+  box-shadow: 0 10px 22px rgba(55,55,90,.08);
+  color:#3b3b58;
+  font-weight:900;
+}
+.opt input:checked + span{
+  background: linear-gradient(180deg, rgba(255,240,250,1), rgba(220,230,255,1));
+  border-color: rgba(140,130,200,.40);
+}
+
+/* iOS image slicing guard */
+img{ -webkit-transform: translateZ(0); }
 .typeCard__top{display:flex; align-items:center; justify-content:space-between}
 .typeTag{font-weight:1000}
 .typeCatch{margin-top:8px; color:var(--muted); line-height:1.6; min-height:44px}
@@ -930,7 +1093,7 @@ body{letter-spacing:.2px}
 }
 
 /* Topbar like reference */
-.topbar{background: rgba(255,255,255,.86); }
+.topbar{background: rgba(255,255,255,.86); backdrop-filter: blur(10px);}
 .brand{display:flex; align-items:center; gap:10px;}
 .brandMark{font-size:22px}
 .brandText{
@@ -1030,210 +1193,4 @@ button, .btn, .homeExact__hotspot{
 button:active, .btn:active, .homeExact__hotspot:active{
   transform: scale(.98);
   filter: brightness(.98);
-}
-
-
-
-/* =========================
-   Pastel theme overrides
-   ========================= */
-:root{
-  --bg:#f7f7fb;
-  --card:#ffffff;
-  --card2:#ffffff;
-  --text:#3a3a52;
-  --muted:#6b6b86;
-  --line:rgba(90,90,120,.18);
-  --accent:#ff62a7;
-  --accent2:#6f7bff;
-  --shadow: 0 18px 40px rgba(40,40,70,.18);
-}
-
-html,body{height:100%}
-body{
-  background:
-    url("assets/home/bg/bg_gradient@2x.png") center/cover no-repeat;
-  color:var(--text);
-}
-
-/* Top bar */
-.topbar{
-  background: rgba(255,255,255,.72);
-  border-bottom:1px solid rgba(255,255,255,.55);
-  box-shadow: 0 10px 30px rgba(40,40,70,.08);
-}
-.brand{gap:0}
-.brand__icon,.brand__text{display:none!important;}
-.brand__logo{
-  height:34px;
-  width:auto;
-  display:block;
-  filter: drop-shadow(0 6px 10px rgba(50,50,80,.18));
-}
-.topnav{display:flex; gap:10px; align-items:center;}
-@media (max-width:420px){
-  .topnav{gap:8px}
-  .brand__logo{height:30px}
-}
-
-.chip, .chip:visited{
-  background: rgba(255,255,255,.86);
-  border:1px solid rgba(160,160,210,.35);
-  color:var(--text);
-  box-shadow: 0 10px 18px rgba(40,40,70,.10);
-}
-.chip--nav{padding:10px 14px; border-radius:999px; font-weight:800;}
-.chip--pink{
-  background: linear-gradient(180deg, rgba(255,230,242,.95), rgba(255,205,227,.95));
-  border-color: rgba(255,120,175,.35);
-  color:#d8327b;
-}
-
-/* Panels */
-.panel{
-  background:
-    url("assets/home/bg/bg_card_base@2x.png") center/cover no-repeat;
-  border:0;
-  box-shadow: var(--shadow);
-}
-
-/* Headings */
-.h2, .sectionTitle{color:#3a3a52}
-.sublead{color:var(--muted)}
-
-/* Home hero */
-.panel--hero{
-  position:relative;
-  overflow:hidden;
-  padding:26px 18px 22px;
-  min-height: 560px;
-}
-.heroTags{display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:6px}
-.tag{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:8px 14px;
-  border-radius:999px;
-  font-weight:900;
-  color:#4a4a66;
-  background: rgba(255,255,255,.82);
-  border:1px solid rgba(160,160,210,.35);
-  box-shadow: 0 10px 18px rgba(40,40,70,.10);
-}
-.tagRow{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
-.tag--gold{
-  background: linear-gradient(180deg, rgba(255,242,196,.95), rgba(255,213,125,.95));
-  border-color: rgba(255,180,80,.40);
-  color:#8a5a10;
-}
-
-.heroLogoWrap{display:flex; justify-content:center; margin:16px 0 6px}
-.heroLogo{
-  width:min(520px, 92%);
-  height:auto;
-  filter: drop-shadow(0 16px 20px rgba(40,40,70,.18));
-}
-
-.heroRibbon{position:relative; display:flex; justify-content:center; margin:10px 0 14px}
-.heroRibbon__bg{width:min(640px, 96%); height:auto}
-.heroRibbon__text{
-  position:absolute; inset:0;
-  display:flex; align-items:center; justify-content:center;
-  text-align:center;
-  font-weight:900;
-  color:#fff;
-  text-shadow: 0 4px 10px rgba(0,0,0,.25);
-  line-height:1.15;
-  padding:0 12px;
-}
-
-.heroCtas{display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:6px}
-.heroCtas__row{display:flex; gap:12px; width:100%; justify-content:center; flex-wrap:wrap}
-
-/* Buttons */
-.btn{
-  border:0;
-  border-radius:999px;
-  padding:12px 18px;
-  font-weight:900;
-  letter-spacing:.02em;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  cursor:pointer;
-  box-shadow: 0 16px 30px rgba(40,40,70,.18);
-  transform: translateZ(0);
-}
-.btn--xl{padding:16px 26px; font-size:20px; min-width:min(520px, 92%); justify-content:center}
-.btn__icon{font-size:18px; display:inline-flex; align-items:center}
-.btn--primary{
-  background: linear-gradient(180deg, #ffd18a, #ff8a3d);
-  color:#fff;
-}
-.btn--blue{
-  background: linear-gradient(180deg, #cfe6ff, #6fb0ff);
-  color:#fff;
-}
-.btn--pink{
-  background: linear-gradient(180deg, #ffd0e6, #ff5aa8);
-  color:#fff;
-}
-
-.btn:active{
-  transform: scale(.98);
-}
-
-/* Home characters */
-.heroChara{
-  position:absolute;
-  bottom:16px;
-  width:120px;
-  opacity:.95;
-  filter: drop-shadow(0 18px 18px rgba(40,40,70,.18));
-}
-.heroChara img{width:100%; height:auto; display:block}
-.heroChara--left{left:18px}
-.heroChara--right{right:18px}
-
-/* Make forms/panels look lighter */
-.opt{
-  background: rgba(255,255,255,.86);
-  border:1px solid rgba(160,160,210,.32);
-  color: var(--text);
-}
-.opt:hover{background: rgba(255,255,255,.95)}
-.q__text{color:var(--text)}
-.q__meta, .q__dim{color:var(--muted)}
-.progress{background: rgba(255,255,255,.65); border:1px solid rgba(160,160,210,.28)}
-.progress__bar{background: linear-gradient(90deg, #ff62a7, #6f7bff)}
-
-/* Footer */
-.footer{background: transparent; border-top:0}
-.footer__inner{
-  background: rgba(255,255,255,.72);
-  border:1px solid rgba(160,160,210,.25);
-  border-radius:16px;
-  padding:12px 14px;
-  box-shadow: 0 10px 24px rgba(40,40,70,.10);
-}
-
-
-/* ===== FIX_V20_LAYOUT_IOS ===== */
-body{background-attachment: scroll;}
-.topbar{background: rgba(255,255,255,.86); box-shadow: 0 10px 30px rgba(40,40,70,.10);}
-.panel--hero{
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-.panel--hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: url("assets/home/bg/bg_card_base@2x.png") center/contain no-repeat;
-  pointer-events:none;
-}
-.panel--hero > *{position:relative; z-index:1;}
-@media (max-width: 520px){
-  .panel--hero{min-height: 0; padding: 22px 14px 18px;}
-  .heroChara{display:none;}
 }
