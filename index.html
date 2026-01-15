@@ -1,229 +1,192 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>うちのこMBTI</title>
-  <meta name="theme-color" content="#ff3d8d">
-
-  <!-- OGP (basic) -->
-  <meta property="og:title" content="うちのこMBTI" />
-  <meta property="og:description" content="ペットの性格をMBTI風に診断！結果カードを保存・シェアして楽しめます。" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="" />
-  <meta property="og:image" content="ogp.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <link rel="stylesheet" href="style.css" />
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>うちのこMBTI</title>
+<meta content="#ff3d8d" name="theme-color"/>
+<!-- OGP (basic) -->
+<meta content="うちのこMBTI" property="og:title">
+<meta content="ペットの性格をMBTI風に診断！結果カードを保存・シェアして楽しめます。" property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="" property="og:url"/>
+<meta content="ogp.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link href="style.css" rel="stylesheet"/>
+</meta></head>
 <body>
-  <header class="topbar">
-    <div class="brand" id="goHome" role="button" aria-label="ホームへ">
-      <img class="brand__logo" src="assets/home/logo_header@2x.png" alt="うちのこMBTI">
-    </div>
-    <div class="topbar__actions">
-      <button class="chip chip--ghost" data-nav="#types" type="button">タイプ一覧</button>
-      <button class="chip chip--pink" data-nav="#compat" type="button">相性診断 ▶</button>
-    </div>
-  </header>
+<header class="topbar">
+<div aria-label="ホームへ" class="brand" id="goHome" role="button">
+<span class="brand__icon">🐾</span>
+<span class="brand__text">うちのこMBTI</span>
+</div>
 
-  <main class="wrap">
-    <!-- HOME -->
-    <section class="view" id="view-home">
-      <div class="homeExact">
-        <!--
-          NOTE:
-          v1の素材は「カード背景」にロゴや文字が焼き込まれていて重なって見えてしまうため、
-          トップは"完成イメージ"を1枚絵として使い、タップ領域だけを重ねる方式に変更。
-          （見た目はピタッと揃って、リンク/ボタンだけ生きる）
-        -->
-        <div class="homeExact__hero homeMock" role="img" aria-label="うちのこMBTI トップ">
-          <!-- Hotspots (透明ボタン) -->
-          <button type="button" class="homeExact__hotspot hs-start" data-nav="#quiz" aria-label="診断スタート"></button>
-          <button type="button" class="homeExact__hotspot hs-detail" data-nav="#types" aria-label="診断の内容を見る"></button>
-          <button type="button" class="homeExact__hotspot hs-compat" data-nav="#compat" aria-label="相性チェック"></button>
-        </div>
-      </div>
-    </section>
-
-    <!-- QUIZ -->
-    <section class="view" id="view-quiz" hidden>
-      <div class="panel">
-        <h2 class="h2 sectionTitle">診断</h2>
-        <p class="sublead">直感で答えてOK。最後に結果カードがでます。かいぬしとの相性も見れます。</p>
-        <div class="progress">
-          <div class="progress__bar" id="progressBar"></div>
-        </div>
-        <div class="progress__meta">
-          <span id="progressText">0 / 30</span>
-          <button class="chip" id="scrollToBottom">最後へ</button>
-        </div>
-      </div>
-
-      <form id="quizForm" class="qwrap" autocomplete="off"></form>
-
-      <div class="actions">
-        <button type="button" class="btn btn-primary btn-xl" id="btnResult"><span class="btnIcon" aria-hidden="true">✨</span> 結果を見る</button>
-        <button type="button" class="btn btn-ghost" id="btnReset">リセット</button>
-      </div>
-    </section>
-
-    <!-- RESULT -->
-    <section class="view" id="view-result" hidden>
-      <div class="panel">
-        <h2 class="h2 sectionTitle">診断結果</h2>
-      </div>
-
-      <div class="cardWrap">
-        <div class="resultCard" id="resultCard">
-          <div class="resultCard__top">
-            <div class="badge" id="resultType">----</div>
-            <div class="resultName" id="resultCatch">タイプ名</div>
-          </div>
-
-          <div class="illus" id="resultIllus" aria-label="イラスト">
-            <!-- placeholder illustration -->
-            <svg viewBox="0 0 600 360" class="illus__svg" role="img" aria-label="イラスト（後で差し替え）">
-              <rect x="16" y="16" width="568" height="328" rx="28"></rect>
-              <text x="50%" y="46%" text-anchor="middle" dominant-baseline="middle">ILLUSTRATION</text>
-              <text x="50%" y="58%" text-anchor="middle" dominant-baseline="middle" class="small">（あとで指定する）</text>
-            </svg>
-          </div>
-
-          <div class="resultCard__body">
-            <div class="block">
-              <div class="block__title">基本特徴</div>
-              <div class="block__text" id="resultDesc"></div>
-            </div>
-
-            <div class="block">
-              <div class="block__title">好き / 嫌い / 得意 / 苦手</div>
-              <div class="block__text" id="resultLikes"></div>
-            </div>
-
-            <div class="mini">
-              <div class="mini__title">相性のいい人間MBTI</div>
-              <div class="mini__chips" id="resultGoodHumans"></div>
-            </div>
-          </div>
-
-          <div class="resultCard__foot">
-            <div class="stamp">#うちのこMBTI</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="actions grid">
-        <button class="btn btn-primary btn-xl" id="btnSaveCard">カードを保存</button>
-        <button class="btn btn-ghost" id="btnShareX">Xでシェア</button>
-        <button class="btn btn-ghost" id="btnShareLink">リンクを共有</button>
-        <button class="btn btn-ghost" data-nav="#quiz" id="btnAgain">もう一回</button>
-        <button class="btn btn-ghost" data-nav="#compat">かいぬしとの相性</button>
-      </div>
-
-      <div class="hint">
-        <div class="hint__title">保存のコツ</div>
-        <div class="hint__text">
+<div class="actions"><button class="chip btn-prominent btn-purunTarget" data-nav="#types" id="navTypes" type="button">タイプ一覧</button><button class="chip btn-prominent btn-purunTarget" data-nav="#compat" id="navCompat" type="button">相性診断 ▶</button><button class="chip btn-prominent btn-purunTarget" data-action="share" id="shareTop" title="リンクを共有" type="button">リンクを共有</button></div></header>
+<main class="wrap">
+<!-- HOME -->
+<section class="view" id="view-home">
+<div class="homeExact">
+<div aria-label="うちのこMBTI トップ" class="homeExact__hero" role="img"></div>
+<!-- Hotspots (transparent buttons) -->
+<button aria-label="診断スタート" class="homeExact__hotspot hotspot-start btn-prominent" data-nav="#quiz" type="button"></button>
+<button aria-label="診断の内容を見る" class="homeExact__hotspot hotspot-detail btn-prominent" data-nav="#types" type="button"></button>
+<button aria-label="相性チェック" class="homeExact__hotspot hotspot-compat btn-prominent" data-nav="#compat" type="button"></button>
+</div>
+</section>
+<!-- QUIZ -->
+<section class="view" hidden="" id="view-quiz">
+<div class="panel">
+<h2 class="h2 sectionTitle">診断</h2>
+<p class="sublead">直感で答えてOK。最後に結果カードがでます。かいぬしとの相性も見れます。</p>
+<div class="progress">
+<div class="progress__bar" id="progressBar"></div>
+</div>
+<div class="progress__meta">
+<span id="progressText">0 / 30</span>
+<button class="chip" id="scrollToBottom">最後へ</button>
+</div>
+</div>
+<form autocomplete="off" class="qwrap" id="quizForm"></form>
+<div class="actions">
+<button class="btn btn-primary btn-xl" id="btnResult" type="button"><span aria-hidden="true" class="btnIcon">✨</span> 結果を見る</button>
+<button class="btn btn-ghost" id="btnReset" type="button">リセット</button>
+</div>
+</section>
+<!-- RESULT -->
+<section class="view" hidden="" id="view-result">
+<div class="panel">
+<h2 class="h2 sectionTitle">診断結果</h2>
+</div>
+<div class="cardWrap">
+<div class="resultCard" id="resultCard">
+<div class="resultCard__top">
+<div class="badge" id="resultType">----</div>
+<div class="resultName" id="resultCatch">タイプ名</div>
+</div>
+<div aria-label="イラスト" class="illus" id="resultIllus">
+<!-- placeholder illustration -->
+<svg aria-label="イラスト（後で差し替え）" class="illus__svg" role="img" viewbox="0 0 600 360">
+<rect height="328" rx="28" width="568" x="16" y="16"></rect>
+<text dominant-baseline="middle" text-anchor="middle" x="50%" y="46%">ILLUSTRATION</text>
+<text class="small" dominant-baseline="middle" text-anchor="middle" x="50%" y="58%">（あとで指定する）</text>
+</svg>
+</div>
+<div class="resultCard__body">
+<div class="block">
+<div class="block__title">基本特徴</div>
+<div class="block__text" id="resultDesc"></div>
+</div>
+<div class="block">
+<div class="block__title">好き / 嫌い / 得意 / 苦手</div>
+<div class="block__text" id="resultLikes"></div>
+</div>
+<div class="mini">
+<div class="mini__title">相性のいい人間MBTI</div>
+<div class="mini__chips" id="resultGoodHumans"></div>
+</div>
+</div>
+<div class="resultCard__foot">
+<div class="stamp">#うちのこMBTI</div>
+</div>
+</div>
+</div>
+<div class="actions grid">
+<button class="btn btn-primary btn-xl" id="btnSaveCard">カードを保存</button>
+<button class="btn btn-ghost" id="btnShareX">Xでシェア</button>
+<button class="btn btn-ghost" id="btnShareLink">リンクを共有</button>
+<button class="btn btn-ghost" data-nav="#quiz" id="btnAgain">もう一回</button>
+<button class="btn btn-ghost" data-nav="#compat">かいぬしとの相性</button>
+</div>
+<div class="hint">
+<div class="hint__title">保存のコツ</div>
+<div class="hint__text">
           iPhoneの場合、<b>「カードを保存」→共有シート</b>が出たら<b>「画像を保存」</b>を選ぶとアルバムに入ります（対応ブラウザで動きます）。<br/>
           共有が出ない場合は、画像がダウンロードされるので長押し保存も試してください。
         </div>
-      </div>
-    </section>
-
-    <!-- COMPAT -->
-    <section class="view" id="view-compat" hidden>
-      <div class="panel">
-        <h2 class="h2 sectionTitle">かいぬしとの相性</h2>
-        <p class="sublead">うちのこ（ペット）と、かいぬし（人間）のMBTIを選ぶだけで相性を表示します。</p>
-      </div>
-
-      <div class="compatForm">
-        <label class="field">
-          <div class="field__label">うちのこMBTI</div>
-          <select id="petTypeSelect" class="select"></select>
-        </label>
-
-        <label class="field">
-          <div class="field__label">かいぬしMBTI</div>
-          <select id="humanTypeSelect" class="select"></select>
-        </label>
-
-        <button class="btn btn-primary btn-xl" id="btnCompat"><span class="btnIcon" aria-hidden="true">💕</span> 診断開始</button>
-      </div>
-
-      <div class="compatActions">
-  <button type="button" class="btn btn-primary btn-xl" id="btnSaveCompat"><span class="btnIcon" aria-hidden="true">💾</span> 結果を保存</button>
 </div>
-<div class="compatResult" id="compatResult" hidden>
-  <div class="compatCard" id="compatCard">
-        <div class="compatScore">
-          <div class="compatScore__num" id="compatPercent">--%</div>
-          <div class="compatScore__meta">
-            <div class="compatScore__types" id="compatTypes">PET × HUMAN</div>
-            <div class="compatScore__tag">ペット×人間 相性</div>
-          </div>
-        </div>
-        <div class="compatText" id="compatText"></div>
-        <div class="compatStamp">#うちのこMBTI</div>
-      </div>
-    </div>
-
-    </section>
-
-    <!-- TYPES LIST -->
-    <section class="view" id="view-types" hidden>
-      <div class="panel">
-        <h2 class="h2 sectionTitle">タイプ一覧</h2>
-        <p class="sublead">ペット視点でのMBTIっぽい特徴まとめ。タップで詳細へ。</p>
-      </div>
-
-      <div class="typesGrid" id="typesGrid"></div>
-    </section>
-
-    <!-- TYPE DETAIL -->
-    <section class="view" id="view-type-detail" hidden>
-      <div class="panel">
-        <button class="chip" data-nav="#types">← 一覧へ</button>
-        <h2 class="h2" id="detailTitle">TYPE</h2>
-        <p class="sublead" id="detailCatch"></p>
-      </div>
-
-      <div class="detail">
-        <div class="detail__illus" id="detailIllus"></div>
-        <div class="detail__block">
-          <div class="block">
-            <div class="block__title">基本特徴</div>
-            <div class="block__text" id="detailDesc"></div>
-          </div>
-          <div class="block">
-            <div class="block__title">好き / 嫌い / 得意 / 苦手</div>
-            <div class="block__text" id="detailLikes"></div>
-          </div>
-
-          <div class="mini">
-            <div class="mini__title">相性のいい人間MBTI</div>
-            <div class="mini__chips" id="detailGoodHumans"></div>
-          </div>
-
-          <div class="actions">
-            <button class="btn btn-primary" data-nav="#quiz">このタイプを目指して診断する</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="footer__inner">
-        <div>© うちのこMBTI</div>
-        <div class="footer__right">
-          <button class="chip" id="copyLinkFooter">🔗 リンクを共有</button>
-        </div>
-      </div>
-    </footer>
-  </main>
-
-  <!-- libs -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <script src="app.js"></script>
+</section>
+<!-- COMPAT -->
+<section class="view" hidden="" id="view-compat">
+<div class="panel">
+<h2 class="h2 sectionTitle">かいぬしとの相性</h2>
+<p class="sublead">うちのこ（ペット）と、かいぬし（人間）のMBTIを選ぶだけで相性を表示します。</p>
+</div>
+<div class="compatForm">
+<label class="field">
+<div class="field__label">うちのこMBTI</div>
+<select class="select" id="petTypeSelect"></select>
+</label>
+<label class="field">
+<div class="field__label">かいぬしMBTI</div>
+<select class="select" id="humanTypeSelect"></select>
+</label>
+<button class="btn btn-primary btn-xl" id="btnCompat"><span aria-hidden="true" class="btnIcon">💕</span> 診断開始</button>
+</div>
+<div class="compatActions">
+<button class="btn btn-primary btn-xl" id="btnSaveCompat" type="button"><span aria-hidden="true" class="btnIcon">💾</span> 結果を保存</button>
+</div>
+<div class="compatResult" hidden="" id="compatResult">
+<div class="compatCard" id="compatCard">
+<div class="compatScore">
+<div class="compatScore__num" id="compatPercent">--%</div>
+<div class="compatScore__meta">
+<div class="compatScore__types" id="compatTypes">PET × HUMAN</div>
+<div class="compatScore__tag">ペット×人間 相性</div>
+</div>
+</div>
+<div class="compatText" id="compatText"></div>
+<div class="compatStamp">#うちのこMBTI</div>
+</div>
+</div>
+</section>
+<!-- TYPES LIST -->
+<section class="view" hidden="" id="view-types">
+<div class="panel">
+<h2 class="h2 sectionTitle">タイプ一覧</h2>
+<p class="sublead">ペット視点でのMBTIっぽい特徴まとめ。タップで詳細へ。</p>
+</div>
+<div class="typesGrid" id="typesGrid"></div>
+</section>
+<!-- TYPE DETAIL -->
+<section class="view" hidden="" id="view-type-detail">
+<div class="panel">
+<button class="chip" data-nav="#types">← 一覧へ</button>
+<h2 class="h2" id="detailTitle">TYPE</h2>
+<p class="sublead" id="detailCatch"></p>
+</div>
+<div class="detail">
+<div class="detail__illus" id="detailIllus"></div>
+<div class="detail__block">
+<div class="block">
+<div class="block__title">基本特徴</div>
+<div class="block__text" id="detailDesc"></div>
+</div>
+<div class="block">
+<div class="block__title">好き / 嫌い / 得意 / 苦手</div>
+<div class="block__text" id="detailLikes"></div>
+</div>
+<div class="mini">
+<div class="mini__title">相性のいい人間MBTI</div>
+<div class="mini__chips" id="detailGoodHumans"></div>
+</div>
+<div class="actions">
+<button class="btn btn-primary" data-nav="#quiz">このタイプを目指して診断する</button>
+</div>
+</div>
+</div>
+</section>
+<footer class="footer">
+<div class="footer__inner">
+<div>© うちのこMBTI</div>
+<div class="footer__right">
+<button class="chip" id="copyLinkFooter">🔗 リンクを共有</button>
+</div>
+</div>
+</footer>
+</main>
+<!-- libs -->
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

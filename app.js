@@ -323,7 +323,7 @@ function updateProgress(){
 }
 
 function onSubmitQuiz(e){
-  if(e && typeof e.preventDefault === 'function') e.preventDefault();
+  e.preventDefault();
   const missing = [];
   for(let i=0;i<QUESTIONS.length;i++){
     if(!$(`#quizForm input[name="q${i}"]:checked`)) missing.push(i+1);
