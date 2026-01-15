@@ -31,54 +31,18 @@
 
   <main class="wrap">
     <!-- HOME -->
-    <section class="view" id="view-home">
+<section class="view" id="view-home">
   <div class="home">
-    <div class="panel panel--hero">
-      <div class="heroTags">
-        <span class="tag tag--gold">#ペット性格診断</span>
-        <div class="tagRow">
-          <span class="tag">#かんたん診断</span>
-          <span class="tag">#シェアしよう</span>
-        </div>
-      </div>
-
-      <div class="heroLogoWrap">
-        <img class="heroLogo" src="assets/home/logo/logo_main@2x.png" alt="うちのこMBTI">
-      </div>
-
-      <div class="heroRibbon">
-        <img class="heroRibbon__bg" src="assets/home/ribbon/ribbon_base@2x.png" alt="30問でサクッと診断♪ 結果カードを保存しよう！">
-      </div>
-
-      <div class="heroCtas">
-        <button type="button" class="btn btn--primary btn--xl" data-nav="#quiz">
-          <span class="btn__icon">🐾</span>
-          <span>診断スタート！</span>
-        </button>
-
-        <div class="heroCtas__row">
-          <button type="button" class="btn btn--blue" data-nav="#types">
-            <span class="btn__icon">📷</span>
-            <span>診断の内容を見る</span>
-          </button>
-          <button type="button" class="btn btn--pink" data-nav="#compat">
-            <span class="btn__icon">♡</span>
-            <span>相性チェック</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="heroChara heroChara--left" aria-hidden="true">
-        <img src="assets/home/characters/chara_cat@2x.png" alt="">
-      </div>
-      <div class="heroChara heroChara--right" aria-hidden="true">
-        <img src="assets/home/characters/chara_dog@2x.png" alt="">
-      </div>
+    <div class="homeMock" aria-label="うちのこMBTI ホーム">
+      <img class="homeMock__img" src="assets/home/mock/home_mock@2x.png" alt="うちのこMBTI ホーム画面">
+      <!-- Hotspots (visual buttons) -->
+      <button type="button" class="hotspot hotspot--start" data-nav="#quiz" aria-label="診断スタート"></button>
+      <button type="button" class="hotspot hotspot--detail" data-nav="#types" aria-label="診断の内容を見る"></button>
+      <button type="button" class="hotspot hotspot--compat" data-nav="#compat" aria-label="相性チェック"></button>
     </div>
   </div>
 </section>
-
-    <!-- QUIZ -->
+<!-- QUIZ -->
     <section class="view" id="view-quiz" hidden>
       <div class="panel">
         <h2 class="h2 sectionTitle">診断</h2>

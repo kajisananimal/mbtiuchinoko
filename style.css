@@ -1194,3 +1194,57 @@ button:active, .btn:active, .homeExact__hotspot:active{
   transform: scale(.98);
   filter: brightness(.98);
 }
+
+
+/* === HOME MOCK (exact visual) === */
+.home{display:flex;justify-content:center;padding:18px 12px 40px}
+.homeMock{
+  position:relative;
+  width:min(520px, 100%);
+  margin:0 auto;
+}
+.homeMock__img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:22px;
+  /* iOS Safari rendering stability */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+.hotspot{
+  position:absolute;
+  border:0;
+  background:transparent;
+  padding:0;
+  cursor:pointer;
+  border-radius:999px;
+  -webkit-tap-highlight-color: transparent;
+}
+.hotspot:active{ transform: scale(0.98); }
+
+/* Hotspot positions are percentages of the mock image */
+.hotspot--start{
+  left:18%;
+  top:63.5%;
+  width:64%;
+  height:10.5%;
+}
+.hotspot--detail{
+  left:18%;
+  top:75.8%;
+  width:38%;
+  height:9.5%;
+}
+.hotspot--compat{
+  left:58%;
+  top:75.8%;
+  width:38%;
+  height:9.5%;
+}
+
+/* Slightly reduce header height on small screens */
+@media (max-width: 420px){
+  .home{padding-top:14px}
+  .topbar{padding:10px 10px}
+}
