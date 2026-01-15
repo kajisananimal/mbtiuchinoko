@@ -30,44 +30,21 @@
   <main class="wrap">
     <!-- HOME -->
     <section class="view" id="view-home">
-    <div class="homeExact">
-      <div class="homeExact__hero" role="img" aria-label="うちのこMBTI トップ">
-        <div class="homeHero__card">
-          <div class="homeHero__badges">
-            <div class="homeHero__badge homeHero__badge--yellow">#ペット性格診断</div>
-            <div class="homeHero__badgeRow">
-              <div class="homeHero__badge">#かんたん診断</div>
-              <div class="homeHero__badge">#シェアしよう</div>
-            </div>
-          </div>
-
-          <div class="homeHero__logoWrap">
-            <img class="homeHero__logoMain" src="assets/home/logo_main@2x.png" alt="うちのこMBTI">
-            <img class="homeHero__cat" src="assets/home/chara_cat@2x.png" alt="">
-            <img class="homeHero__dog" src="assets/home/chara_dog@2x.png" alt="">
-          </div>
-
-          <div class="homeHero__ribbon">
-            <img class="homeHero__ribbonImg" src="assets/home/ribbon_base@2x.png" alt="">
-            <div class="homeHero__ribbonText">30問でサクッと診断♪<br>結果カードを保存しよう！</div>
-          </div>
-
-          <button type="button" class="homeHero__btnPrimary btn-prominent" data-nav="#quiz" aria-label="診断スタート">
-            <span class="homeHero__btnIcon">🐾</span><span class="homeHero__btnText">診断スタート！</span>
-          </button>
-
-          <div class="homeHero__btnRow">
-            <button type="button" class="homeHero__btnSecondary btn-prominent" data-nav="#types" aria-label="診断の内容を見る">
-              <span class="homeHero__btnIcon">📷</span><span class="homeHero__btnText">診断の内容を見る</span>
-            </button>
-            <button type="button" class="homeHero__btnSecondary homeHero__btnSecondary--pink btn-prominent" data-nav="#compat" aria-label="相性チェック">
-              <span class="homeHero__btnIcon">❤</span><span class="homeHero__btnText">相性チェック</span>
-            </button>
-          </div>
+      <div class="homeExact">
+        <!--
+          NOTE:
+          v1の素材は「カード背景」にロゴや文字が焼き込まれていて重なって見えてしまうため、
+          トップは"完成イメージ"を1枚絵として使い、タップ領域だけを重ねる方式に変更。
+          （見た目はピタッと揃って、リンク/ボタンだけ生きる）
+        -->
+        <div class="homeExact__hero homeMock" role="img" aria-label="うちのこMBTI トップ">
+          <!-- Hotspots (透明ボタン) -->
+          <button type="button" class="homeExact__hotspot hs-start" data-nav="#quiz" aria-label="診断スタート"></button>
+          <button type="button" class="homeExact__hotspot hs-detail" data-nav="#types" aria-label="診断の内容を見る"></button>
+          <button type="button" class="homeExact__hotspot hs-compat" data-nav="#compat" aria-label="相性チェック"></button>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
     <!-- QUIZ -->
     <section class="view" id="view-quiz" hidden>

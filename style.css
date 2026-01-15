@@ -1092,6 +1092,45 @@ body{
   box-shadow: 0 18px 60px rgba(0,0,0,.16);
   border: 2px solid rgba(255,255,255,.75);
 }
+
+/* Top mock (1枚絵) */
+.homeExact__hero.homeMock{
+  background: url("assets/home/home_mock@2x.png") center/contain no-repeat;
+  background-color: rgba(255,255,255,.2);
+}
+
+.homeExact__hotspot{
+  position:absolute;
+  border: 0;
+  background: rgba(255,255,255,0);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.homeExact__hotspot:active{transform: scale(.98);}
+
+/* Hotspot positions (percent-based so PC/SPでも崩れにくい) */
+.homeExact__hotspot.hs-start{
+  left: 18%;
+  top: 64.5%;
+  width: 64%;
+  height: 10.5%;
+  border-radius: 18px;
+}
+.homeExact__hotspot.hs-detail{
+  left: 14.5%;
+  top: 78.2%;
+  width: 36.5%;
+  height: 8.5%;
+  border-radius: 16px;
+}
+.homeExact__hotspot.hs-compat{
+  left: 49.0%;
+  top: 78.2%;
+  width: 36.5%;
+  height: 8.5%;
+  border-radius: 16px;
+}
 .homeHero__card{
   position:absolute;
   inset: 7% 6%;
