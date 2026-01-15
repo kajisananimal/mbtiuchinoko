@@ -1248,3 +1248,21 @@ button:active, .btn:active, .homeExact__hotspot:active{
   .home{padding-top:14px}
   .topbar{padding:10px 10px}
 }
+
+
+/* === HOME MOCK sizing fix (mobile) === */
+:root{ --topbar-h: 74px; }
+@media (max-width: 520px){
+  .home{
+    min-height: calc(100vh - var(--topbar-h));
+    align-items: center;
+    padding: 14px 10px 30px;
+  }
+  .homeMock{
+    width: min(420px, 94vw);
+  }
+  .homeMock__img{
+    max-height: calc(100vh - var(--topbar-h) - 44px);
+    object-fit: contain;
+  }
+}
