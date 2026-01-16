@@ -1210,11 +1210,8 @@ button:active, .btn:active, .homeExact__hotspot:active{
   height:100%;
   object-fit: contain;
   display:block;
-  /* iOS Safari sometimes duplicates layers when filter/3D transforms are used on large images.
-     Use a simple shadow instead (stable). */
-  filter: none;
-  transform: none;
-  box-shadow: 0 22px 60px rgba(23,28,45,.18);
+  filter: drop-shadow(0 22px 60px rgba(23,28,45,.18));
+  transform: translateZ(0);
 }
 
 .homeCard__logo{
