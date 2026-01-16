@@ -18,70 +18,30 @@
 </head>
 <body>
   <header class="topbar">
-  <div class="brand" id="goHome" role="button" aria-label="ホームへ">
-    <img class="brand__logo" src="assets/home/logo/logo_header@2x.png" alt="うちのこMBTI">
-  </div>
+    <div class="brand" id="goHome" role="button" aria-label="ホームへ">
+      <span class="brand__icon">🐾</span>
+      <span class="brand__text">うちのこMBTI</span>
+    </div>
 
-  <nav class="topnav" aria-label="メニュー">
-    <button class="chip chip--nav" data-nav="#types">タイプ一覧</button>
-    <button class="chip chip--nav chip--pink" data-nav="#compat">相性診断 ▶</button>
-    <button class="chip chip--nav" id="shareTop" title="リンクを共有">リンクを共有</button>
-  </nav>
-</header>
+    <button class="chip" id="shareTop" title="リンクを共有">🔗 共有</button>
+  </header>
 
   <main class="wrap">
     <!-- HOME -->
-<section class="view view--home" id="view-home">
-  <div class="homeStage">
-    <div class="homeCard" aria-label="うちのこMBTI ホーム">
-      <img class="homeCard__base" src="assets/home/bg/bg_card_base@2x.png" alt="" aria-hidden="true">
+    <section class="view" id="view-home">
 
-      <div class="homeCard__content">
-        <div class="homeHash">
-          <span class="homeHash__pill homeHash__pill--main">#ペット性格診断</span>
-          <div class="homeHash__row">
-            <span class="homeHash__pill">#かんたん診断</span>
-            <span class="homeHash__pill">#シェアしよう</span>
-          </div>
-        </div>
+    <div class="homeExact">
+      <div class="homeExact__hero" role="img" aria-label="うちのこMBTI トップ"></div>
 
-        <div class="homeLogo">
-          <img src="assets/home/logo/logo_main@2x.png" alt="うちのこMBTI" />
-        </div>
-
-        <div class="homeChars" aria-hidden="true">
-          <img class="homeChar homeChar--cat" src="assets/home/characters/chara_cat@2x.png" alt="" />
-          <img class="homeChar homeChar--dog" src="assets/home/characters/chara_dog@2x.png" alt="" />
-        </div>
-
-        <div class="homeRibbon" aria-hidden="true">
-          <img class="homeRibbon__img" src="assets/home/ribbon/ribbon_base@2x.png" alt="" />
-          <div class="homeRibbon__text">30問でサクッと診断♪<br>結果カードを保存しよう！</div>
-        </div>
-
-        <div class="homeBtns">
-          <button type="button" class="homeBtn homeBtn--primary" data-nav="#quiz" aria-label="診断スタート">
-            <img src="assets/home/buttons/btn_primary_base@2x.png" alt="" aria-hidden="true" />
-            <span class="homeBtn__text">診断スタート！</span>
-          </button>
-
-          <div class="homeBtns__row">
-            <button type="button" class="homeBtn homeBtn--secondary" data-nav="#types" aria-label="診断の内容を見る">
-              <img src="assets/home/buttons/btn_secondary_base@2x.png" alt="" aria-hidden="true" />
-              <span class="homeBtn__text">診断の内容を見る</span>
-            </button>
-
-            <button type="button" class="homeBtn homeBtn--compat" data-nav="#compat" aria-label="相性チェック">
-              <img src="assets/home/buttons/btn_compatibility_base@2x.png" alt="" aria-hidden="true" />
-              <span class="homeBtn__text">相性チェック</span>
-            </button>
-          </div>
-        </div>
-      </div>
+      <!-- Hotspots (transparent buttons) -->
+      <button type="button" class="homeExact__hotspot hotspot-start btn-prominent" data-nav="#quiz" aria-label="診断スタート"></button>
+      <button type="button" class="homeExact__hotspot hotspot-detail btn-prominent" data-nav="#types" aria-label="診断の内容を見る"></button>
+      <button type="button" class="homeExact__hotspot hotspot-compat btn-prominent" data-nav="#compat" aria-label="相性チェック"></button>
     </div>
-  </div>
-</section>
-<!-- QUIZ -->
+
+  </section>
+
+    <!-- QUIZ -->
     <section class="view" id="view-quiz" hidden>
       <div class="panel">
         <h2 class="h2 sectionTitle">診断</h2>
