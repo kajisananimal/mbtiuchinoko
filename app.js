@@ -323,7 +323,8 @@ function updateProgress(){
 }
 
 function onSubmitQuiz(e){
-  e.preventDefault();
+  // click handler 以外から呼ばれても落ちないように
+  e?.preventDefault?.();
   const missing = [];
   for(let i=0;i<QUESTIONS.length;i++){
     if(!$(`#quizForm input[name="q${i}"]:checked`)) missing.push(i+1);
@@ -950,16 +951,10 @@ document.addEventListener("click",(e)=>{
 });
 
 /* ===== PURUN_ALL_V17 ===== */
-(function(){
-  function triggerPurun(el){
-    if(!el) return;
-    el.classList.remove("btn-purun");
-    void el.offsetWidth;
-    el.classList.add("btn-purun");
-  }
-  document.addEventListener("click",(e)=>{
-    const btn = e.target && e.target.closest ? e.target.closest("button, a.btn") : null;
-    if(!btn) return;
-    triggerPurun(btn);
-  });
-})();
+document.addEventListener("click",(e)=>{
+  const b = e.target && e.target.closest ? e.target.closest("button") : null;
+  if(!b) return;
+  b.classList.remove("btn-purun");
+  void b.offsetWidth;
+  b.classList.add("btn-purun");
+});
