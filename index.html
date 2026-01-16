@@ -33,7 +33,8 @@
     <!-- HOME -->
 <section class="view" id="view-home">
   <div class="homeExact" aria-label="うちのこMBTI ホーム">
-    <div class="homeExact__hero" role="img" aria-label="うちのこMBTI トップ"></div>
+    <!-- Use a real <img> instead of a background-image to avoid iOS Safari layer-duplication glitches -->
+    <img class="homeExact__img" src="assets/home_top.png" alt="うちのこMBTI トップ" loading="eager" decoding="async" />
 
     <!-- Clickable areas (transparent) -->
     <button type="button" class="homeExact__hotspot hotspot-start" data-nav="#quiz" aria-label="診断スタート"></button>

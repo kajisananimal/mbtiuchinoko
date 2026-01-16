@@ -197,6 +197,8 @@ function bindClick(id, fn){
 
 function show(hash){
   const target = hash || "#home";
+  // Home-only layout tweaks (avoid iOS Safari layer duplication / stray footer overlap)
+  document.body.classList.toggle("is-home", target === "#home" || target === "" );
   // hide all
   $all(".view").forEach(v=>v.hidden = true);
 

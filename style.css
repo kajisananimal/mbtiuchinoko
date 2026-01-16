@@ -230,6 +230,18 @@ body{
   color:#2b2b3a;
 }
 
+/* ===== HOME: single-layer lock (no extra stacked UI) ===== */
+body.is-home{ overflow: hidden; }
+body.is-home .wrap{ max-width:none; padding:0; }
+body.is-home #view-home{
+  min-height: calc(100svh - 64px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 14px 10px 18px;
+}
+body.is-home .footer{ display:none; }
+
 /* Sticky header: pastel, avoid heavy blur that breaks on iOS */
 .topbar{
   background: rgba(255,255,255,.72);
@@ -1053,13 +1065,16 @@ body{letter-spacing:.2px}
   margin: 10px auto 0;
   position: relative;
 }
-.homeExact__hero{
+.homeExact__img{
   width: 100%;
-  aspect-ratio: 3 / 4; /* match provided artwork */
+  height: auto;
+  display: block;
   border-radius: 34px;
-  background: url("assets/home_top.png") center/cover no-repeat;
   box-shadow: 0 26px 70px rgba(23,28,45,.16);
   border: 2px solid rgba(255,255,255,.78);
+  /* Avoid iOS Safari compositing glitches */
+  transform: none !important;
+  filter: none !important;
 }
 .homeExact__hotspot{
   position:absolute;
