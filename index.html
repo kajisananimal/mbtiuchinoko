@@ -31,14 +31,53 @@
 
   <main class="wrap">
     <!-- HOME -->
-<section class="view" id="view-home">
-  <div class="home">
-    <div class="homeMock" aria-label="うちのこMBTI ホーム">
-      <img class="homeMock__img" src="assets/home/mock/home_mock@2x.png" alt="うちのこMBTI ホーム画面">
-      <!-- Hotspots (visual buttons) -->
-      <button type="button" class="hotspot hotspot--start" data-nav="#quiz" aria-label="診断スタート"></button>
-      <button type="button" class="hotspot hotspot--detail" data-nav="#types" aria-label="診断の内容を見る"></button>
-      <button type="button" class="hotspot hotspot--compat" data-nav="#compat" aria-label="相性チェック"></button>
+<section class="view view--home" id="view-home">
+  <div class="homeStage">
+    <div class="homeCard" aria-label="うちのこMBTI ホーム">
+      <img class="homeCard__base" src="assets/home/bg/bg_card_base@2x.png" alt="" aria-hidden="true">
+
+      <div class="homeCard__content">
+        <div class="homeHash">
+          <span class="homeHash__pill homeHash__pill--main">#ペット性格診断</span>
+          <div class="homeHash__row">
+            <span class="homeHash__pill">#かんたん診断</span>
+            <span class="homeHash__pill">#シェアしよう</span>
+          </div>
+        </div>
+
+        <div class="homeLogo">
+          <img src="assets/home/logo/logo_main@2x.png" alt="うちのこMBTI" />
+        </div>
+
+        <div class="homeChars" aria-hidden="true">
+          <img class="homeChar homeChar--cat" src="assets/home/characters/chara_cat@2x.png" alt="" />
+          <img class="homeChar homeChar--dog" src="assets/home/characters/chara_dog@2x.png" alt="" />
+        </div>
+
+        <div class="homeRibbon" aria-hidden="true">
+          <img class="homeRibbon__img" src="assets/home/ribbon/ribbon_base@2x.png" alt="" />
+          <div class="homeRibbon__text">30問でサクッと診断♪<br>結果カードを保存しよう！</div>
+        </div>
+
+        <div class="homeBtns">
+          <button type="button" class="homeBtn homeBtn--primary" data-nav="#quiz" aria-label="診断スタート">
+            <img src="assets/home/buttons/btn_primary_base@2x.png" alt="" aria-hidden="true" />
+            <span class="homeBtn__text">診断スタート！</span>
+          </button>
+
+          <div class="homeBtns__row">
+            <button type="button" class="homeBtn homeBtn--secondary" data-nav="#types" aria-label="診断の内容を見る">
+              <img src="assets/home/buttons/btn_secondary_base@2x.png" alt="" aria-hidden="true" />
+              <span class="homeBtn__text">診断の内容を見る</span>
+            </button>
+
+            <button type="button" class="homeBtn homeBtn--compat" data-nav="#compat" aria-label="相性チェック">
+              <img src="assets/home/buttons/btn_compatibility_base@2x.png" alt="" aria-hidden="true" />
+              <span class="homeBtn__text">相性チェック</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -464,6 +464,7 @@ img{ -webkit-transform: translateZ(0); }
 body{
   color:var(--text);
   background:
+    url("assets/home/bg/bg_gradient@2x.png") center / cover no-repeat fixed,
     radial-gradient(900px 700px at 10% 0%, rgba(255,61,141,.18), transparent 60%),
     radial-gradient(900px 700px at 95% 20%, rgba(61,214,255,.18), transparent 60%),
     radial-gradient(900px 700px at 40% 100%, rgba(255,183,3,.18), transparent 60%),
@@ -1195,6 +1196,123 @@ button:active, .btn:active, .homeExact__hotspot:active{
   filter: brightness(.98);
 }
 
+
+/* === HOME (built from sliced assets) === */
+.view--home{padding-bottom:0}
+.homeStage{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height: calc(100vh - var(--topbar-h, 74px));
+  padding: 16px 12px 28px;
+}
+.homeCard{
+  position:relative;
+  width: min(920px, 94vw);
+  max-width: 980px;
+}
+.homeCard__base{
+  width:100%;
+  height:auto;
+  display:block;
+  filter: drop-shadow(0 18px 40px rgba(31,36,48,.14));
+}
+.homeCard__content{
+  position:absolute;
+  inset:0;
+}
+
+/* hash pills */
+.homeHash{position:absolute; left:50%; top:10.5%; transform:translateX(-50%); text-align:center;}
+.homeHash__pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: .42em .9em;
+  border-radius: 999px;
+  border:1px solid rgba(255,61,141,.22);
+  background: rgba(255,255,255,.90);
+  font-weight: 900;
+  color:#5f6b85;
+  box-shadow: 0 10px 18px rgba(31,36,48,.08);
+  font-size: clamp(12px, 1.6vw, 16px);
+}
+.homeHash__pill--main{
+  background: linear-gradient(180deg, rgba(255,214,92,.96), rgba(255,183,3,.92));
+  border-color: rgba(255,183,3,.45);
+  color: rgba(120,70,0,.95);
+  padding: .48em 1.05em;
+  font-size: clamp(13px, 1.9vw, 17px);
+}
+.homeHash__row{margin-top:.55em; display:flex; gap:.6em; justify-content:center; flex-wrap:wrap}
+
+/* main logo */
+.homeLogo{position:absolute; left:50%; top:26%; transform:translate(-50%,-50%); width: min(78%, 760px);}
+.homeLogo img{width:100%; height:auto; display:block; filter: drop-shadow(0 14px 22px rgba(255,61,141,.18));}
+
+/* characters */
+.homeChars{position:absolute; left:0; right:0; top:39%; height: 0;}
+.homeChar{position:absolute; width: clamp(90px, 14vw, 160px); height:auto;}
+.homeChar--cat{left: 9%; transform: translateY(-50%);}
+.homeChar--dog{right: 9%; transform: translateY(-50%);}
+
+/* ribbon */
+.homeRibbon{position:absolute; left:50%; top:56.5%; transform:translate(-50%,-50%); width: min(86%, 820px);}
+.homeRibbon__img{width:100%; height:auto; display:block;}
+.homeRibbon__text{
+  position:absolute; inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight: 1000;
+  color:#ffffff;
+  text-shadow: 0 10px 22px rgba(31,36,48,.18);
+  line-height: 1.35;
+  font-size: clamp(14px, 2.1vw, 22px);
+}
+
+/* buttons */
+.homeBtns{position:absolute; left:50%; top:74%; transform:translate(-50%,-50%); width: min(80%, 780px);}
+.homeBtn{
+  position:relative;
+  border:0;
+  background:transparent;
+  padding:0;
+  cursor:pointer;
+  display:block;
+  width:100%;
+  -webkit-tap-highlight-color: transparent;
+}
+.homeBtn img{width:100%; height:auto; display:block;}
+.homeBtn__text{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 1000;
+  letter-spacing: .6px;
+  text-shadow: 0 10px 24px rgba(31,36,48,.18);
+  user-select:none;
+}
+.homeBtn--primary .homeBtn__text{color:#ffffff; font-size: clamp(18px, 2.8vw, 34px);}
+.homeBtns__row{display:flex; gap: min(2.6vw, 18px); margin-top: min(2.2vw, 16px);}
+.homeBtn--secondary, .homeBtn--compat{flex:1}
+.homeBtn--secondary .homeBtn__text{color:#ffffff; font-size: clamp(13px, 1.8vw, 20px);}
+.homeBtn--compat .homeBtn__text{color:#ffffff; font-size: clamp(13px, 1.8vw, 20px);}
+
+/* press animation */
+.homeBtn{transition: transform .12s ease, filter .12s ease;}
+.homeBtn:active{transform: scale(.98); filter: brightness(.98);}
+
+@media (max-width: 520px){
+  .homeStage{padding: 14px 10px 24px;}
+  .homeBtns{width: min(88%, 520px);}
+  .homeLogo{width: min(86%, 520px);}
+  .homeChar--cat{left: 6%;}
+  .homeChar--dog{right: 6%;}
+}
 
 /* === HOME MOCK (exact visual) === */
 .home{display:flex;justify-content:center;padding:18px 12px 40px}
