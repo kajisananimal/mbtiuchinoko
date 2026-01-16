@@ -1204,20 +1204,17 @@ button:active, .btn:active, .homeExact__hotspot:active{
   width: min(520px, 92vw);
   max-height: calc(100vh - var(--topbar-h) - 34px);
   aspect-ratio: 1092 / 1434;
-  /* Shadow without CSS filters (filters can glitch on iOS Safari while scrolling) */
-  box-shadow: 0 22px 60px rgba(23,28,45,.18);
-  border-radius: 28px;
 }
 .homeCard__base{
   width:100%;
   height:100%;
   object-fit: contain;
   display:block;
-  /* iOS Safari sometimes visually duplicates large images when filters/transforms are applied.
-     Keep the IMG clean and apply shadow to the container instead. */
+  /* iOS Safari sometimes duplicates layers when filter/3D transforms are used on large images.
+     Use a simple shadow instead (stable). */
   filter: none;
   transform: none;
-  backface-visibility: hidden;
+  box-shadow: 0 22px 60px rgba(23,28,45,.18);
 }
 
 .homeCard__logo{
